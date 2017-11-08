@@ -1,0 +1,37 @@
+// Copyright © 2016-2017 Shawn Baker using the MIT License.
+errorBadAddress = "Invalid address.";
+errorNameAlreadyExists = "The camera name already exists.";
+errorNoAddress = "You must enter an address.";
+errorNoName = "You must enter a name.";
+errorNoValue = "You must enter a %@.";
+errorValueOutOfRange = "The %@ must be between %d and %d.";
+
+aboutInfo = "Copyright © 2016-2017 Shawn Baker<br><br>
+This is an open source program.<br>
+It\'s available on <a href=\"https://github.com/ShawnBaker/iOS_RPiCameraViewer\">github</a> under the <a href=\"https://opensource.org/licenses/MIT\">MIT License</a><br><br>
+Raspberry image by <a href=\"http://www.how-to-draw-funny-cartoons.com\">Martin Bérubé</a><br>
+Camera image by <a href=\"http://www.oxygen-icons.org\">Oxygen Team</a><br>";
+appName = "RPi Camera Viewer";
+bps = "bits per second";
+camera = "Camera";
+done = "Done";
+error = "Error";
+fps = "frames per second";
+height = "height";
+helpText = "<p>This program plays the raw H.264 video from a Raspberry Pi.
+<br><br>
+Use the <b>raspivid</b> program to generate the video stream and the <b>nc</b> program to send the stream out over a specific port.
+<br><br>
+For example, to stream 1280x720 video at 15 frames per second over port 5001, you would do:
+<br><br>
+raspivid -n -ih -t 0 -rot 0 -w 1280 -h 720 -b 1000000 -fps 15 -o - | nc -lkv4 5001</p>";
+newCamerasFound = "New cameras found: %d";
+initializingVideo = "Initializing video...";
+no = "No";
+ok = "OK";
+okToDeleteAllCameras = "Are you sure you want to delete all the cameras?";
+port = "port";
+scanningOnPort = "Scanning on port %d";
+version = "Version %@";
+width = "width";
+yes = "Yes";

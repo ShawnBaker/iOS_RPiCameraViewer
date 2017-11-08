@@ -1,0 +1,471 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		29FAE7A31FB38CBB00747217 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7A21FB38CBB00747217 /* AppDelegate.swift */; };
+		29FAE7AA1FB38CBB00747217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29FAE7A91FB38CBB00747217 /* Assets.xcassets */; };
+		29FAE7BA1FB38EA400747217 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7B51FB38EA300747217 /* StringExt.swift */; };
+		29FAE7BB1FB38EA400747217 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7B61FB38EA300747217 /* Settings.swift */; };
+		29FAE7BC1FB38EA400747217 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7B71FB38EA300747217 /* Source.swift */; };
+		29FAE7BD1FB38EA400747217 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7B81FB38EA300747217 /* Camera.swift */; };
+		29FAE7BE1FB38EA400747217 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7B91FB38EA300747217 /* Utils.swift */; };
+		29FAE7CB1FB38F1800747217 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7C21FB38F1600747217 /* VideoViewController.swift */; };
+		29FAE7CC1FB38F1800747217 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7C31FB38F1600747217 /* SettingsViewController.swift */; };
+		29FAE7CD1FB38F1800747217 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7C41FB38F1700747217 /* TabBarController.swift */; };
+		29FAE7CE1FB38F1800747217 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7C51FB38F1700747217 /* AboutViewController.swift */; };
+		29FAE7CF1FB38F1800747217 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7C61FB38F1700747217 /* CameraViewController.swift */; };
+		29FAE7D01FB38F1800747217 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7C71FB38F1700747217 /* HelpViewController.swift */; };
+		29FAE7D11FB38F1800747217 /* CamerasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7C81FB38F1700747217 /* CamerasViewController.swift */; };
+		29FAE7D21FB38F1800747217 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7C91FB38F1700747217 /* InputViewController.swift */; };
+		29FAE7D31FB38F1800747217 /* ScanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7CA1FB38F1700747217 /* ScanningViewController.swift */; };
+		29FAE7D71FB38F2400747217 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7D41FB38F2300747217 /* Button.swift */; };
+		29FAE7D81FB38F2400747217 /* IntTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7D51FB38F2300747217 /* IntTextField.swift */; };
+		29FAE7D91FB38F2400747217 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7D61FB38F2400747217 /* Popup.swift */; };
+		29FAE7DC1FB38F3D00747217 /* mysocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7DA1FB38F3C00747217 /* mysocket.c */; };
+		29FAE7EF1FB3939400747217 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 29FAE7EE1FB3939300747217 /* Localizable.strings */; };
+		29FAE7F51FB39D2D00747217 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FAE7F11FB39D2D00747217 /* LaunchScreen.storyboard */; };
+		29FAE7F61FB39D2D00747217 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FAE7F31FB39D2D00747217 /* Main.storyboard */; };
+		29FAE7FA1FB39DAF00747217 /* Main.strings in Resources */ = {isa = PBXBuildFile; fileRef = 29FAE7F81FB39DAE00747217 /* Main.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		29FAE79F1FB38CBB00747217 /* RPiCameraViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPiCameraViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		29FAE7A21FB38CBB00747217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		29FAE7A91FB38CBB00747217 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		29FAE7AE1FB38CBB00747217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29FAE7B51FB38EA300747217 /* StringExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
+		29FAE7B61FB38EA300747217 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		29FAE7B71FB38EA300747217 /* Source.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
+		29FAE7B81FB38EA300747217 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		29FAE7B91FB38EA300747217 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		29FAE7C21FB38F1600747217 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		29FAE7C31FB38F1600747217 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		29FAE7C41FB38F1700747217 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		29FAE7C51FB38F1700747217 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		29FAE7C61FB38F1700747217 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		29FAE7C71FB38F1700747217 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		29FAE7C81FB38F1700747217 /* CamerasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CamerasViewController.swift; sourceTree = "<group>"; };
+		29FAE7C91FB38F1700747217 /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		29FAE7CA1FB38F1700747217 /* ScanningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanningViewController.swift; sourceTree = "<group>"; };
+		29FAE7D41FB38F2300747217 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		29FAE7D51FB38F2300747217 /* IntTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntTextField.swift; sourceTree = "<group>"; };
+		29FAE7D61FB38F2400747217 /* Popup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
+		29FAE7DA1FB38F3C00747217 /* mysocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mysocket.c; sourceTree = "<group>"; };
+		29FAE7DB1FB38F3D00747217 /* mysocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mysocket.h; sourceTree = "<group>"; };
+		29FAE7DD1FB38F4D00747217 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		29FAE7EE1FB3939300747217 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		29FAE7F21FB39D2D00747217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		29FAE7F41FB39D2D00747217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		29FAE7F91FB39DAE00747217 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Main.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		29FAE79C1FB38CBB00747217 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		29FAE7961FB38CBB00747217 = {
+			isa = PBXGroup;
+			children = (
+				29FAE7A11FB38CBB00747217 /* RPiCameraViewer */,
+				29FAE7A01FB38CBB00747217 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		29FAE7A01FB38CBB00747217 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				29FAE79F1FB38CBB00747217 /* RPiCameraViewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29FAE7A11FB38CBB00747217 /* RPiCameraViewer */ = {
+			isa = PBXGroup;
+			children = (
+				29FAE7B41FB38CD100747217 /* Classes */,
+				29FAE7BF1FB38ED400747217 /* Sockets */,
+				29FAE7C01FB38EDB00747217 /* Views */,
+				29FAE7C11FB38EE100747217 /* ViewControllers */,
+				29FAE7F01FB39D2D00747217 /* Base.lproj */,
+				29FAE7F71FB39DAE00747217 /* en.lproj */,
+				29FAE7EE1FB3939300747217 /* Localizable.strings */,
+				29FAE7DD1FB38F4D00747217 /* Bridging-Header.h */,
+				29FAE7A21FB38CBB00747217 /* AppDelegate.swift */,
+				29FAE7A91FB38CBB00747217 /* Assets.xcassets */,
+				29FAE7AE1FB38CBB00747217 /* Info.plist */,
+			);
+			path = RPiCameraViewer;
+			sourceTree = "<group>";
+		};
+		29FAE7B41FB38CD100747217 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				29FAE7B81FB38EA300747217 /* Camera.swift */,
+				29FAE7B61FB38EA300747217 /* Settings.swift */,
+				29FAE7B71FB38EA300747217 /* Source.swift */,
+				29FAE7B51FB38EA300747217 /* StringExt.swift */,
+				29FAE7B91FB38EA300747217 /* Utils.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		29FAE7BF1FB38ED400747217 /* Sockets */ = {
+			isa = PBXGroup;
+			children = (
+				29FAE7DA1FB38F3C00747217 /* mysocket.c */,
+				29FAE7DB1FB38F3D00747217 /* mysocket.h */,
+			);
+			path = Sockets;
+			sourceTree = "<group>";
+		};
+		29FAE7C01FB38EDB00747217 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				29FAE7D41FB38F2300747217 /* Button.swift */,
+				29FAE7D51FB38F2300747217 /* IntTextField.swift */,
+				29FAE7D61FB38F2400747217 /* Popup.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		29FAE7C11FB38EE100747217 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				29FAE7C51FB38F1700747217 /* AboutViewController.swift */,
+				29FAE7C81FB38F1700747217 /* CamerasViewController.swift */,
+				29FAE7C61FB38F1700747217 /* CameraViewController.swift */,
+				29FAE7C71FB38F1700747217 /* HelpViewController.swift */,
+				29FAE7C91FB38F1700747217 /* InputViewController.swift */,
+				29FAE7CA1FB38F1700747217 /* ScanningViewController.swift */,
+				29FAE7C31FB38F1600747217 /* SettingsViewController.swift */,
+				29FAE7C41FB38F1700747217 /* TabBarController.swift */,
+				29FAE7C21FB38F1600747217 /* VideoViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		29FAE7F01FB39D2D00747217 /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				29FAE7F11FB39D2D00747217 /* LaunchScreen.storyboard */,
+				29FAE7F31FB39D2D00747217 /* Main.storyboard */,
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		29FAE7F71FB39DAE00747217 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				29FAE7F81FB39DAE00747217 /* Main.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		29FAE79E1FB38CBB00747217 /* RPiCameraViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29FAE7B11FB38CBB00747217 /* Build configuration list for PBXNativeTarget "RPiCameraViewer" */;
+			buildPhases = (
+				29FAE79B1FB38CBB00747217 /* Sources */,
+				29FAE79C1FB38CBB00747217 /* Frameworks */,
+				29FAE79D1FB38CBB00747217 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RPiCameraViewer;
+			productName = RPiCameraViewer;
+			productReference = 29FAE79F1FB38CBB00747217 /* RPiCameraViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29FAE7971FB38CBB00747217 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0910;
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = "Shawn Baker";
+				TargetAttributes = {
+					29FAE79E1FB38CBB00747217 = {
+						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0910;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 29FAE79A1FB38CBB00747217 /* Build configuration list for PBXProject "RPiCameraViewer" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 29FAE7961FB38CBB00747217;
+			productRefGroup = 29FAE7A01FB38CBB00747217 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				29FAE79E1FB38CBB00747217 /* RPiCameraViewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		29FAE79D1FB38CBB00747217 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29FAE7F51FB39D2D00747217 /* LaunchScreen.storyboard in Resources */,
+				29FAE7EF1FB3939400747217 /* Localizable.strings in Resources */,
+				29FAE7AA1FB38CBB00747217 /* Assets.xcassets in Resources */,
+				29FAE7F61FB39D2D00747217 /* Main.storyboard in Resources */,
+				29FAE7FA1FB39DAF00747217 /* Main.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		29FAE79B1FB38CBB00747217 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29FAE7BA1FB38EA400747217 /* StringExt.swift in Sources */,
+				29FAE7CE1FB38F1800747217 /* AboutViewController.swift in Sources */,
+				29FAE7D01FB38F1800747217 /* HelpViewController.swift in Sources */,
+				29FAE7CB1FB38F1800747217 /* VideoViewController.swift in Sources */,
+				29FAE7CD1FB38F1800747217 /* TabBarController.swift in Sources */,
+				29FAE7D21FB38F1800747217 /* InputViewController.swift in Sources */,
+				29FAE7D31FB38F1800747217 /* ScanningViewController.swift in Sources */,
+				29FAE7CF1FB38F1800747217 /* CameraViewController.swift in Sources */,
+				29FAE7D81FB38F2400747217 /* IntTextField.swift in Sources */,
+				29FAE7BD1FB38EA400747217 /* Camera.swift in Sources */,
+				29FAE7D91FB38F2400747217 /* Popup.swift in Sources */,
+				29FAE7BE1FB38EA400747217 /* Utils.swift in Sources */,
+				29FAE7BB1FB38EA400747217 /* Settings.swift in Sources */,
+				29FAE7BC1FB38EA400747217 /* Source.swift in Sources */,
+				29FAE7A31FB38CBB00747217 /* AppDelegate.swift in Sources */,
+				29FAE7CC1FB38F1800747217 /* SettingsViewController.swift in Sources */,
+				29FAE7D11FB38F1800747217 /* CamerasViewController.swift in Sources */,
+				29FAE7DC1FB38F3D00747217 /* mysocket.c in Sources */,
+				29FAE7D71FB38F2400747217 /* Button.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		29FAE7F11FB39D2D00747217 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29FAE7F21FB39D2D00747217 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		29FAE7F31FB39D2D00747217 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29FAE7F41FB39D2D00747217 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		29FAE7F81FB39DAE00747217 /* Main.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29FAE7F91FB39DAE00747217 /* en */,
+			);
+			name = Main.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		29FAE7AF1FB38CBB00747217 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "RPi Camera Viewer/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		29FAE7B01FB38CBB00747217 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "RPi Camera Viewer/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		29FAE7B21FB38CBB00747217 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3985AHAG8A;
+				INFOPLIST_FILE = RPiCameraViewer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ca.frozen.RPiCameraViewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RPiCameraViewer/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		29FAE7B31FB38CBB00747217 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3985AHAG8A;
+				INFOPLIST_FILE = RPiCameraViewer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ca.frozen.RPiCameraViewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RPiCameraViewer/Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		29FAE79A1FB38CBB00747217 /* Build configuration list for PBXProject "RPiCameraViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29FAE7AF1FB38CBB00747217 /* Debug */,
+				29FAE7B01FB38CBB00747217 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		29FAE7B11FB38CBB00747217 /* Build configuration list for PBXNativeTarget "RPiCameraViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29FAE7B21FB38CBB00747217 /* Debug */,
+				29FAE7B31FB38CBB00747217 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29FAE7971FB38CBB00747217 /* Project object */;
+}

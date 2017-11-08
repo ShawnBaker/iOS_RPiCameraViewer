@@ -1,0 +1,48 @@
+
+/* Class = "UILabel"; text = "Height"; ObjectID = "05V-Om-nG0"; */
+"05V-Om-nG0.text" = "Height";
+
+/* Class = "UINavigationItem"; title = "Camera Details"; ObjectID = "0eF-V6-LhQ"; */
+"0eF-V6-LhQ.title" = "Camera Details";
+
+/* Class = "UILabel"; text = "Width"; ObjectID = "4X6-um-Mab"; */
+"4X6-um-Mab.text" = "Width";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "CVH-WL-J4n"; */
+"CVH-WL-J4n.text" = "Name";
+
+/* Class = "UILabel"; text = "Frames per second"; ObjectID = "Ccg-5J-P4z"; */
+"Ccg-5J-P4z.text" = "Frames per second";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "GcS-y3-xXJ"; */
+"GcS-y3-xXJ.text" = "Detail";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "HlT-gq-Fpv"; */
+"HlT-gq-Fpv.text" = "Label";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "JEQ-hB-zjV"; */
+"JEQ-hB-zjV.text" = "Address";
+
+/* Class = "UILabel"; text = "Bits per second"; ObjectID = "KI7-Vt-YTf"; */
+"KI7-Vt-YTf.text" = "Bits per second";
+
+/* Class = "UINavigationItem"; title = "RPi Camera Viewer"; ObjectID = "Vhv-ch-keu"; */
+"Vhv-ch-keu.title" = "RPi Camera Viewer";
+
+/* Class = "UILabel"; text = "Network"; ObjectID = "YhM-O0-Jna"; */
+"YhM-O0-Jna.text" = "Network";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "aOY-O9-6Gw"; */
+"aOY-O9-6Gw.text" = "Title";
+
+/* Class = "UILabel"; text = "Port"; ObjectID = "lQO-VA-9tZ"; */
+"lQO-VA-9tZ.text" = "Port";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "n6X-88-05y"; */
+"n6X-88-05y.title" = "Cancel";
+
+/* Class = "UIBarButtonItem"; title = "Cameras"; ObjectID = "oTl-0M-ny2"; */
+"oTl-0M-ny2.title" = "Cameras";
+
+/* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "qAp-C8-WeZ"; */
+"qAp-C8-WeZ.title" = "Save";
