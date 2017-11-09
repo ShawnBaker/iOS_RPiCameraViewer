@@ -8,6 +8,9 @@ class VideoViewController: UIViewController
 	// constants
 	let READ_SIZE = 16384
 	let MAX_READ_ERRORS = 300
+	let FADE_OUT_WAIT_TIME = 8.0
+	let FADE_OUT_INTERVAL = 1.0
+	let FADE_IN_INTERVAL = 0.3
 
 	// outlets
 	@IBOutlet weak var statusLabel: UILabel!
@@ -17,8 +20,10 @@ class VideoViewController: UIViewController
 	
 	// instance variables
 	var camera: Camera?
+	var fadeOutTimer: Timer?
 	var running = false
 	var stopped = false
+	var takeSnapshot = false
 	let app = UIApplication.shared.delegate as! AppDelegate
 	var videoLayer: AVSampleBufferDisplayLayer?
 	var formatDescription: CMVideoFormatDescription?
@@ -33,11 +38,22 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	override func viewDidLoad()
 	{
+		// initialize the controls
 		super.viewDidLoad()
-		statusLabel.text = "initializingVideo".local
 		nameLabel.text = camera!.name
+		statusLabel.text = "initializingVideo".local
+
+		// set up the tap gesture recognizer
+		let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGesture(_:)))
+		view.addGestureRecognizer(tap)
+		view.isUserInteractionEnabled = true
+		
+		// start reading the stream and passing the data to the video layer
 		createVideoLayer()
 		createReadThread()
+		
+		// fade out after a while
+		startFadeOutTimer()
 	}
 	
 	//**********************************************************************
@@ -45,6 +61,9 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	override func viewWillDisappear(_ animated: Bool)
 	{
+		// stop fading out the controls
+		stopFadeOutTimer()
+		
 		// wait for the read thread to stop
 		running = false
 		while !stopped
@@ -74,8 +93,72 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	@IBAction func handleSnapshotButtonTouchUpInside(_ sender: Any)
 	{
+		snapshotButton.isEnabled = false
+		takeSnapshot = true
+		startFadeOutTimer()
 	}
 
+	//**********************************************************************
+	// handleTapGesture
+	//**********************************************************************
+	@objc func handleTapGesture(_ sender: UITapGestureRecognizer)
+	{
+		fadeIn()
+	}
+	
+	//**********************************************************************
+	// startFadeOutTimer
+	//**********************************************************************
+	func startFadeOutTimer()
+	{
+		stopFadeOutTimer()
+		fadeOutTimer = Timer.scheduledTimer(timeInterval: FADE_OUT_WAIT_TIME, target: self, selector: #selector(fadeOut), userInfo: nil, repeats: false)
+	}
+	
+	//**********************************************************************
+	// stopFadeOutTimer
+	//**********************************************************************
+	func stopFadeOutTimer()
+	{
+		if let timer = fadeOutTimer, timer.isValid
+		{
+			timer.invalidate()
+		}
+		fadeOutTimer = nil
+	}
+	
+	//**********************************************************************
+	// fadeIn
+	//**********************************************************************
+	func fadeIn()
+	{
+		stopFadeOutTimer()
+		UIView.animate(withDuration: FADE_IN_INTERVAL, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations:
+		{
+			self.statusLabel.alpha = 1.0
+			self.nameLabel.alpha = 1.0
+			self.backButton.alpha = 1.0
+			self.snapshotButton.alpha = 1.0
+		},
+		completion: { (Bool) -> Void in self.startFadeOutTimer() })
+	}
+	
+	//**********************************************************************
+	// fadeOut
+	//**********************************************************************
+	@objc func fadeOut()
+	{
+		stopFadeOutTimer()
+		UIView.animate(withDuration: FADE_OUT_INTERVAL, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations:
+		{
+			self.statusLabel.alpha = 0.0
+			self.nameLabel.alpha = 0.0
+			self.backButton.alpha = 0.0
+			self.snapshotButton.alpha = 0.0
+		},
+		completion: nil)
+	}
+	
 	//**********************************************************************
 	// createVideoLayer
 	//**********************************************************************
@@ -126,7 +209,6 @@ class VideoViewController: UIViewController
 						let len = readSocket(socket, ptr, Int32(self.READ_SIZE))
 						if len > 0
 						{
-							//print("read", len)
 							numReadErrors = 0
 							for i in 0..<len
 							{
@@ -172,7 +254,6 @@ class VideoViewController: UIViewController
 						}
 					}
 					closeSocket(socket)
-					//print("done", numReadErrors)
 				}
 				self.stopped = true
 			}
@@ -252,12 +333,18 @@ class VideoViewController: UIViewController
 		// pass the sample buffer to the video layer
 		if let buffer = sampleBuffer, let layer = videoLayer, layer.isReadyForMoreMediaData
 		{
+			if takeSnapshot
+			{
+				var infoFlags = VTDecodeInfoFlags(rawValue: 0)
+				status = VTDecompressionSessionDecodeFrame(videoSession!, buffer, [._EnableAsynchronousDecompression], nil, &infoFlags)
+			}
+			
 			layer.enqueue(buffer)
 			layer.setNeedsDisplay()
 		}
 		return true;
 	}
-	
+
 	//**********************************************************************
 	// createVideoSession
 	//**********************************************************************
@@ -278,8 +365,13 @@ class VideoViewController: UIViewController
 		let destinationPixelBufferAttributes = NSMutableDictionary()
 		destinationPixelBufferAttributes.setValue(NSNumber(value: kCVPixelFormatType_32BGRA), forKey: kCVPixelBufferPixelFormatTypeKey as String)
 		
+		// create the callback for getting snapshots
+		var callback = VTDecompressionOutputCallbackRecord()
+		callback.decompressionOutputCallback = globalDecompressionCallback
+		callback.decompressionOutputRefCon = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
+		
 		// create the video session
-		status = VTDecompressionSessionCreate(nil, formatDescription!, decoderParameters, destinationPixelBufferAttributes, nil, &videoSession)
+		status = VTDecompressionSessionCreate(nil, formatDescription!, decoderParameters, destinationPixelBufferAttributes, &callback, &videoSession)
 		return status == noErr
 	}
 
@@ -297,4 +389,53 @@ class VideoViewController: UIViewController
 		pps = nil
 		formatDescription = nil
 	}
+	
+	//**********************************************************************
+	// decompressionCallback
+	//**********************************************************************
+	func decompressionCallback(_ sourceFrameRefCon: UnsafeMutableRawPointer?, _ status: OSStatus, _ infoFlags: VTDecodeInfoFlags, _ imageBuffer: CVImageBuffer?, _ presentationTimeStamp: CMTime, _ presentationDuration: CMTime)
+	{
+		if takeSnapshot, let cvImageBuffer = imageBuffer
+		{
+			let ciImage = CIImage(cvImageBuffer: cvImageBuffer)
+			let size = CVImageBufferGetEncodedSize(cvImageBuffer)
+			let context = CIContext()
+			if let cgImage = context.createCGImage(ciImage, from: CGRect(origin: CGPoint.zero, size: size))
+			{
+				let uiImage = UIImage(cgImage: cgImage)
+				UIImageWriteToSavedPhotosAlbum(uiImage, self, #selector(imageSaved(_:didFinishSavingWithError:contextInfo:)), nil)
+			}
+			takeSnapshot = false
+			DispatchQueue.main.async
+			{
+				self.snapshotButton.isEnabled = true
+			}
+		}
+	}
+	
+	//**********************************************************************
+	// imageSaved
+	//**********************************************************************
+	@objc func imageSaved(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer)
+	{
+		if let error = error
+		{
+			let ac = UIAlertController(title: "Save Error", message: error.localizedDescription, preferredStyle: .alert)
+			ac.addAction(UIAlertAction(title: "OK", style: .default))
+			present(ac, animated: true)
+		}
+		else
+		{
+			AudioServicesPlaySystemSoundWithCompletion(SystemSoundID(1108), nil)
+		}
+	}
+}
+
+//**********************************************************************
+// globalDecompressionCallback
+//**********************************************************************
+private func globalDecompressionCallback(_ decompressionOutputRefCon: UnsafeMutableRawPointer?, _ sourceFrameRefCon: UnsafeMutableRawPointer?, _ status: OSStatus, _ infoFlags: VTDecodeInfoFlags, _ imageBuffer: CVImageBuffer?, _ presentationTimeStamp: CMTime, _ presentationDuration: CMTime) -> Void
+{
+	let videoController: VideoViewController = unsafeBitCast(decompressionOutputRefCon, to: VideoViewController.self)
+	videoController.decompressionCallback(sourceFrameRefCon, status, infoFlags, imageBuffer, presentationTimeStamp, presentationDuration)
 }
