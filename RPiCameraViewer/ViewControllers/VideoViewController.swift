@@ -46,6 +46,9 @@ class VideoViewController: UIViewController
 		nameLabel.text = camera!.name
 		statusLabel.text = "initializingVideo".local
 
+		// handle orientation changes
+		NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+		
 		// set up the tap and double tap gesture recognizers
 		let doubleTap = UITapGestureRecognizer(target: self, action: #selector(self.handleDoubleTapGesture(_:)))
 		doubleTap.numberOfTapsRequired = 2
@@ -71,6 +74,24 @@ class VideoViewController: UIViewController
 	}
 	
 	//**********************************************************************
+	// deinit
+	//**********************************************************************
+	deinit
+	{
+		NotificationCenter.default.removeObserver(self)
+	}
+	
+	//**********************************************************************
+	// orientationDidChange
+	//**********************************************************************
+	@objc func orientationDidChange()
+	{
+		videoLayer?.frame = view.frame
+		videoLayer?.bounds = view.bounds
+		zoomPan?.reset()
+	}
+	
+	//**********************************************************************
 	// viewWillDisappear
 	//**********************************************************************
 	override func viewWillDisappear(_ animated: Bool)
@@ -88,8 +109,8 @@ class VideoViewController: UIViewController
 		// terminate the video processing
 		if let layer = videoLayer
 		{
-			layer.flush()
 			layer.stopRequestingMediaData()
+			layer.flush()
 		}
 		destroyVideoSession()
 	}
