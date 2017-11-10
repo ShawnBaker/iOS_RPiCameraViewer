@@ -11,7 +11,6 @@ class LayerZoomPan
 	var maxZoom: CGFloat = 10.0
 	var videoSize = CGSize.zero
 	var fitSize = CGSize.zero
-	var fitZoom = CGPoint(x: 1, y: 1)
 	var zoom: CGFloat = 1
 	var pan = CGPoint.zero
 	var panStart = CGPoint.zero
@@ -29,6 +28,33 @@ class LayerZoomPan
 	}
 	
 	//**********************************************************************
+	// reset
+	//**********************************************************************
+	func reset()
+	{
+		// get the fitted view size
+		let viewSize = view.frame.size
+		let viewAspect = viewSize.height / viewSize.width
+		let videoAspect = videoSize.height / videoSize.width
+		if videoAspect < viewAspect
+		{
+			fitSize.width = viewSize.width
+			fitSize.height = videoSize.height * viewSize.width / videoSize.width
+		}
+		else
+		{
+			fitSize.width = videoSize.width * viewSize.height / videoSize.height
+			fitSize.height = viewSize.height
+		}
+		
+		// set the layer position
+		layer.position = CGPoint(x: viewSize.width / 2, y: viewSize.height / 2)
+		
+		// clear the transform
+		setZoomPan(1, CGPoint.zero)
+	}
+	
+	//**********************************************************************
 	// setVideoSize
 	//**********************************************************************
 	func setVideoSize(size: CGSize)
@@ -37,29 +63,9 @@ class LayerZoomPan
 		{
 			// set the video size
 			videoSize = size;
-
-			// get the video aspect ratio
-			let aspectRatio = videoSize.height / videoSize.width
 			
-			// get the fitted view size
-			let viewSize = view.frame.size
-			if viewSize.height > viewSize.width * aspectRatio
-			{
-				fitSize.width = viewSize.width
-				fitSize.height = viewSize.width * aspectRatio
-			}
-			else
-			{
-				fitSize.width = viewSize.height / aspectRatio
-				fitSize.height = viewSize.height
-			}
-			
-			// get the fitted zoom
-			fitZoom.x = fitSize.width / viewSize.width
-			fitZoom.y = fitSize.height / viewSize.height
-			
-			// clear the transform
-			setZoomPan(1, CGPoint.zero)
+			// reset the view
+			reset()
 		}
 	}
 	
@@ -141,7 +147,6 @@ class LayerZoomPan
 	{
 		let maxPan = CGPoint(x: max((fitSize.width * zoom - view.frame.width) / 2, 0),
 							 y: max((fitSize.height * zoom - view.frame.height) / 2, 0))
-		//print(view.frame.size, fitSize, fitZoom, zoom, maxPan)
 		return maxPan
 	}
 	
@@ -159,7 +164,7 @@ class LayerZoomPan
 		}
 		
 		// scale relative to the center
-		transform = CATransform3DScale(transform, fitZoom.x * zoom, fitZoom.y * zoom, 1)
+		transform = CATransform3DScale(transform, zoom, zoom, 1)
 
 		// set the transform
 		layer.transform = transform
@@ -200,7 +205,6 @@ class LayerZoomPan
 		if (zoom > 1)
 		{
 			let distance = gesture.translation(in: view)
-			//print(distance)
 			setPan(panStart.x + distance.x, panStart.y + distance.y)
 		}
 	}
