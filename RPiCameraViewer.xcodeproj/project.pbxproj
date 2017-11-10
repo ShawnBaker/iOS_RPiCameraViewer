@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29E792911FB4FBEA0083CA75 /* LayerZoomPan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E792901FB4FBEA0083CA75 /* LayerZoomPan.swift */; };
 		29FAE7A31FB38CBB00747217 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7A21FB38CBB00747217 /* AppDelegate.swift */; };
 		29FAE7AA1FB38CBB00747217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29FAE7A91FB38CBB00747217 /* Assets.xcassets */; };
 		29FAE7BA1FB38EA400747217 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7B51FB38EA300747217 /* StringExt.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29E792901FB4FBEA0083CA75 /* LayerZoomPan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerZoomPan.swift; sourceTree = "<group>"; };
 		29FAE79F1FB38CBB00747217 /* RPiCameraViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPiCameraViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29FAE7A21FB38CBB00747217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29FAE7A91FB38CBB00747217 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				29FAE7B71FB38EA300747217 /* Source.swift */,
 				29FAE7B51FB38EA300747217 /* StringExt.swift */,
 				29FAE7B91FB38EA300747217 /* Utils.swift */,
+				29E792901FB4FBEA0083CA75 /* LayerZoomPan.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				29FAE7D81FB38F2400747217 /* IntTextField.swift in Sources */,
 				29FAE7BD1FB38EA400747217 /* Camera.swift in Sources */,
 				29FAE7D91FB38F2400747217 /* Popup.swift in Sources */,
+				29E792911FB4FBEA0083CA75 /* LayerZoomPan.swift in Sources */,
 				29FAE7BE1FB38EA400747217 /* Utils.swift in Sources */,
 				29FAE7BB1FB38EA400747217 /* Settings.swift in Sources */,
 				29FAE7BC1FB38EA400747217 /* Source.swift in Sources */,

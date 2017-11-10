@@ -10,7 +10,7 @@ class VideoViewController: UIViewController
 	let MAX_READ_ERRORS = 300
 	let FADE_OUT_WAIT_TIME = 8.0
 	let FADE_OUT_INTERVAL = 1.0
-	let FADE_IN_INTERVAL = 0.3
+	let FADE_IN_INTERVAL = 0.1
 
 	// outlets
 	@IBOutlet weak var statusLabel: UILabel!
@@ -24,6 +24,7 @@ class VideoViewController: UIViewController
 	var running = false
 	var stopped = false
 	var takeSnapshot = false
+	var zoomPan: LayerZoomPan?
 	let app = UIApplication.shared.delegate as! AppDelegate
 	var videoLayer: AVSampleBufferDisplayLayer?
 	var formatDescription: CMVideoFormatDescription?
@@ -38,16 +39,29 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	override func viewDidLoad()
 	{
-		// initialize the controls
+		// initialize the view and controls
 		super.viewDidLoad()
+		view.isUserInteractionEnabled = true
+		view.backgroundColor = UIColor.black
 		nameLabel.text = camera!.name
 		statusLabel.text = "initializingVideo".local
 
-		// set up the tap gesture recognizer
+		// set up the tap and double tap gesture recognizers
+		let doubleTap = UITapGestureRecognizer(target: self, action: #selector(self.handleDoubleTapGesture(_:)))
+		doubleTap.numberOfTapsRequired = 2
+		view.addGestureRecognizer(doubleTap)
 		let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGesture(_:)))
+		tap.numberOfTapsRequired = 1
+		tap.require(toFail: doubleTap)
 		view.addGestureRecognizer(tap)
-		view.isUserInteractionEnabled = true
-		
+
+		// set up the pinch and pan gesture recognizers
+		let pinch = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinchGesture(_:)))
+		view.addGestureRecognizer(pinch)
+		let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(_:)))
+		pan.maximumNumberOfTouches = 2
+		view.addGestureRecognizer(pan)
+
 		// start reading the stream and passing the data to the video layer
 		createVideoLayer()
 		createReadThread()
@@ -101,9 +115,33 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	// handleTapGesture
 	//**********************************************************************
-	@objc func handleTapGesture(_ sender: UITapGestureRecognizer)
+	@objc func handleTapGesture(_ tap: UITapGestureRecognizer)
 	{
 		fadeIn()
+	}
+	
+	//**********************************************************************
+	// handleDoubleTapGesture
+	//**********************************************************************
+	@objc func handleDoubleTapGesture(_ tap: UITapGestureRecognizer)
+	{
+		zoomPan?.setZoomPan(1, CGPoint.zero)
+	}
+	
+	//**********************************************************************
+	// handlePinchGesture
+	//**********************************************************************
+	@objc func handlePinchGesture(_ pinch: UIPinchGestureRecognizer)
+	{
+		zoomPan?.handlePinchGesture(pinch)
+	}
+	
+	//**********************************************************************
+	// handlePanGesture
+	//**********************************************************************
+	@objc func handlePanGesture(_ pan: UIPanGestureRecognizer)
+	{
+		zoomPan?.handlePanGesture(pan)
 	}
 	
 	//**********************************************************************
@@ -180,6 +218,8 @@ class VideoViewController: UIViewController
 				view.bringSubview(toFront: nameLabel)
 				view.bringSubview(toFront: backButton)
 				view.bringSubview(toFront: snapshotButton)
+
+				zoomPan = LayerZoomPan(view, layer)
 			}
 		}
 	}
@@ -342,7 +382,7 @@ class VideoViewController: UIViewController
 			layer.enqueue(buffer)
 			layer.setNeedsDisplay()
 		}
-		return true;
+		return true
 	}
 
 	//**********************************************************************
@@ -359,6 +399,8 @@ class VideoViewController: UIViewController
 		{
 			return false
 		}
+		let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription!)
+		zoomPan?.setVideoSize(CGFloat(dimensions.width), CGFloat(dimensions.height))
 		
 		// create the decoder parameters
 		let decoderParameters = NSMutableDictionary()
