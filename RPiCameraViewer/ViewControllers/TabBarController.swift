@@ -3,6 +3,8 @@ import UIKit
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate
 {
+	var camerasViewController: CamerasViewController?
+	
     //**********************************************************************
     // viewDidLoad
     //**********************************************************************
@@ -10,6 +12,22 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate
     {
         super.viewDidLoad()
         delegate = self
+		
+		for viewController in viewControllers!
+		{
+			var vc = viewController
+			
+			if vc is UINavigationController
+			{
+				let navigationController = vc as! UINavigationController
+				vc = navigationController.topViewController!
+			}
+			
+			if vc is CamerasViewController
+			{
+				camerasViewController = (vc as! CamerasViewController)
+			}
+		}
     }
     
     //**********************************************************************
@@ -20,7 +38,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate
     {
         if let settings = selectedViewController as? SettingsViewController
         {
-            return settings.save()
+			let result = settings.save()
+			camerasViewController?.refreshCameras()
+            return result
         }
         return true
     }

@@ -14,6 +14,7 @@ Camera image by <a href=\"http://www.oxygen-icons.org\">Oxygen Team</a><br>";
 appName = "RPi Camera Viewer";
 bps = "bits per second";
 camera = "Camera";
+deleteAllCameras = "Delete all Cameras";
 done = "Done";
 error = "Error";
 fps = "frames per second";

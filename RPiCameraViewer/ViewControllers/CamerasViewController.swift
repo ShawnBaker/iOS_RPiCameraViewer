@@ -10,7 +10,6 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 	let cameraCellId = "CameraCell"
 	let emptyCellId = "EmptyCameraCell"
 	let app = UIApplication.shared.delegate as! AppDelegate
-	var network = Utils.getNetworkName()
 	var camera = Camera()
 	var cameras = [Camera]()
 
@@ -69,7 +68,7 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 	//**********************************************************************
 	func getCameras()
 	{
-		cameras = network.isEmpty ? app.cameras : Utils.getNetworkCameras(network)
+		cameras = app.settings.showAllCameras ? app.cameras : Utils.getNetworkCameras()
 		cameras.sort(by: { $0.name < $1.name })
 	}
 	
@@ -95,7 +94,7 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 	//**********************************************************************
 	@IBAction func deleteAllCameras(_ sender: UIBarButtonItem)
 	{
-		let alert = UIAlertController(title: "Alert", message: "okToDeleteAllCameras".local, preferredStyle: .alert)
+		let alert = UIAlertController(title: "deleteAllCameras".local, message: "okToDeleteAllCameras".local, preferredStyle: .alert)
 		
 		alert.addAction(UIAlertAction(title: "yes".local, style: .default) { (action:UIAlertAction) in
 
@@ -164,7 +163,12 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 		let cell = tableView.dequeueReusableCell(withIdentifier: cameraCellId, for: indexPath)
 		let camera = cameras[indexPath.row]
 		cell.textLabel?.text = camera.name
-		cell.detailTextLabel?.text = camera.source.address + ":" + String(camera.source.port)
+		var details = camera.source.address + ":" + String(camera.source.port)
+		if app.settings.showAllCameras
+		{
+			details = camera.network + ": " + details
+		}
+		cell.detailTextLabel?.text = details
 		return cell
 	}
 
