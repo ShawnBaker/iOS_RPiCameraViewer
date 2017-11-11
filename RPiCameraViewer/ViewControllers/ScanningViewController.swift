@@ -176,11 +176,11 @@ class ScanningViewController: UIViewController
 			self.statusLabel.text = String(format: "newCamerasFound".local, self.newCameras.count)
 			if self.newCameras.count > 0
 			{
-				self.statusLabel.textColor = UIColor.black
+				self.statusLabel.textColor = Utils.goodTextColor
 			}
 			else if last
 			{
-				self.statusLabel.textColor = UIColor.red
+				self.statusLabel.textColor = Utils.badTextColor
 			}
 			if last
 			{

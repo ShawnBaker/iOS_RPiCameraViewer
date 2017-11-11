@@ -5,6 +5,11 @@ import UIKit
 
 class Utils
 {
+	// global colors
+	static let badTextColor = UIColor.red
+	static let goodTextColor = UIColor.init(red: 0, green: CGFloat(192) / 255.0, blue: 0, alpha: 1)
+	static let primaryColor = UIColor.init(red: CGFloat(214) / 255.0, green: CGFloat(25) / 255.0, blue: CGFloat(25) / 255.0, alpha: 1)
+	
 	//**********************************************************************
 	// getNetworkName
 	//**********************************************************************

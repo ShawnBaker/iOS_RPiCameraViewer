@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     {
         load()
         
-        let barColor = UIColor(red: 224/255, green: 0, blue: 0, alpha: 1)
+        let barColor = Utils.primaryColor
         UINavigationBar.appearance().barTintColor = barColor
         UINavigationBar.appearance().tintColor = UIColor.white
 		UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]

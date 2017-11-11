@@ -10,7 +10,7 @@ import UIKit
     {
         super.init(coder: aDecoder)
         self.tintColor = UIColor.white
-        self.backgroundColor = UIColor(red: 224/255, green: 0, blue: 0, alpha: 1)
+        self.backgroundColor = Utils.primaryColor
     }
     
     //**********************************************************************
