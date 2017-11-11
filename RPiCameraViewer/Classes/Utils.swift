@@ -83,15 +83,19 @@ class Utils
 	//**********************************************************************
 	// getNetworkCameras
 	//**********************************************************************
-	class func getNetworkCameras(_ network: String) -> [Camera]
+	class func getNetworkCameras() -> [Camera]
 	{
-		let app = UIApplication.shared.delegate as! AppDelegate
 		var networkCameras = [Camera]()
-		for camera in app.cameras
+		let network = getNetworkName()
+		if !network.isEmpty
 		{
-			if camera.network == network
+			let app = UIApplication.shared.delegate as! AppDelegate
+			for camera in app.cameras
 			{
-				networkCameras.append(camera)
+				if camera.network == network
+				{
+					networkCameras.append(camera)
+				}
 			}
 		}
 	
@@ -108,7 +112,7 @@ class Utils
 	}
 
 	//**********************************************************************
-	// getNetworkCameras
+	// getMaxCameraNumber
 	//**********************************************************************
 	class func getMaxCameraNumber(_ cameras: [Camera]) -> Int
 	{
