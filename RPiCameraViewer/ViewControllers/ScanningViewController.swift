@@ -31,34 +31,45 @@ class ScanningViewController: UIViewController
     {
         super.viewDidLoad()
 		
-		messageLabel.text = String(format: "scanningOnPort".local, app.settings.source.port)
 		progressView.progress = 0
 		progressView.transform = progressView.transform.scaledBy(x: 1, y: 2)
-		statusLabel.text = String(format: "newCamerasFound".local, 0)
 		cancelButton.addTarget(self, action:#selector(handleCancelButtonTouchUpInside), for: .touchUpInside)
-		
-		if !ipAddress.isEmpty
+		if network.isEmpty
 		{
-			let octets = ipAddress.split(separator: ".")
-			for _ in 1...NUM_THREADS
+			messageLabel.text = "notScanning".local
+			messageLabel.textColor = Utils.badTextColor
+			statusLabel.text = "errorNoNetwork".local
+			statusLabel.textColor = Utils.badTextColor
+			cancelButton.setTitle("done".local, for: UIControlState.normal)
+		}
+		else
+		{
+			messageLabel.text = String(format: "scanningOnPort".local, app.settings.source.port)
+			statusLabel.text = String(format: "newCamerasFound".local, 0)
+			
+			if !ipAddress.isEmpty
 			{
-				DispatchQueue.global(qos: .background).async
+				let octets = ipAddress.split(separator: ".")
+				for _ in 1...NUM_THREADS
 				{
-					var dev: Int = self.getNextDevice()
-					while self.scanning && dev != self.NO_DEVICE
+					DispatchQueue.global(qos: .background).async
 					{
-						let address = String(format: "%@.%@.%@.%d", String(octets[0]), String(octets[1]), String(octets[2]), dev)
-						if address != self.ipAddress
+						var dev: Int = self.getNextDevice()
+						while self.scanning && dev != self.NO_DEVICE
 						{
-							let socket = openSocket(address, Int32(self.app.settings.source.port), Int32(self.app.settings.scanTimeout))
-							if (socket >= 0)
+							let address = String(format: "%@.%@.%@.%d", String(octets[0]), String(octets[1]), String(octets[2]), dev)
+							if address != self.ipAddress
 							{
-								self.addCamera(address)
-								closeSocket(socket)
+								let socket = openSocket(address, Int32(self.app.settings.source.port), Int32(self.app.settings.scanTimeout))
+								if (socket >= 0)
+								{
+									self.addCamera(address)
+									closeSocket(socket)
+								}
 							}
+							self.doneDevice(dev);
+							dev = self.getNextDevice()
 						}
-						self.doneDevice(dev);
-						dev = self.getNextDevice()
 					}
 				}
 			}

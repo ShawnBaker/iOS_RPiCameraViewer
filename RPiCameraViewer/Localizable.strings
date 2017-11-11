@@ -3,6 +3,7 @@ errorBadAddress = "Invalid address.";
 errorNameAlreadyExists = "The camera name already exists.";
 errorNoAddress = "You must enter an address.";
 errorNoName = "You must enter a name.";
+errorNoNetwork = "There is no network to scan.";
 errorNoValue = "You must enter a %@.";
 errorValueOutOfRange = "The %@ must be between %d and %d.";
 
@@ -30,6 +31,7 @@ raspivid -n -ih -t 0 -rot 0 -w 1280 -h 720 -b 1000000 -fps 15 -o - | nc -lkv4 50
 newCamerasFound = "New cameras found: %d";
 initializingVideo = "Initializing video...";
 no = "No";
+notScanning = "Not scanning.";
 ok = "OK";
 okToDeleteAllCameras = "Are you sure you want to delete all the cameras?";
 port = "port";
