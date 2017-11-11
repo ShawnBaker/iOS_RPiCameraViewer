@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         UITabBar.appearance().barTintColor = barColor
         UITabBar.appearance().tintColor = UIColor.white
+		UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.black], for: UIControlState.normal)
+		UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: UIControlState.selected)
         UITableViewCell.appearance().tintColor = barColor
         
         return true

@@ -13,19 +13,26 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate
         super.viewDidLoad()
         delegate = self
 		
+		// get the view controllers we want to easily access
 		for viewController in viewControllers!
 		{
+			// set the tab bar item icon colors
 			var vc = viewController
-			
-			if vc is UINavigationController
+			if let image = vc.tabBarItem.image
 			{
-				let navigationController = vc as! UINavigationController
-				vc = navigationController.topViewController!
+				vc.tabBarItem.image = image.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
 			}
 			
-			if vc is CamerasViewController
+			// get the top view controller if necessary
+			if let nav = vc as? UINavigationController
 			{
-				camerasViewController = (vc as! CamerasViewController)
+				vc = nav.topViewController!
+			}
+			
+			// get the cameras view controller
+			if let cameras = vc as? CamerasViewController
+			{
+				camerasViewController = cameras
 			}
 		}
     }
