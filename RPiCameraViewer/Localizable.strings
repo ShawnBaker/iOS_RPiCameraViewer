@@ -35,5 +35,6 @@ okToDeleteAllCameras = "Are you sure you want to delete all the cameras?";
 port = "port";
 scanningOnPort = "Scanning on port %d";
 version = "Version %@";
+videoStopped = "Video stopped.";
 width = "width";
 yes = "Yes";

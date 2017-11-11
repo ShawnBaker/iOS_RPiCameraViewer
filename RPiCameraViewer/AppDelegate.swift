@@ -8,14 +8,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     var window: UIWindow?
     var settings = Settings()
     var cameras = [Camera]()
+	var videoViewController: VideoViewController?
 
     //**********************************************************************
     // application
     //**********************************************************************
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     {
+		// load the settings and cameras
         load()
-        
+		
+		// set the UI element colors
         let barColor = Utils.primaryColor
         UINavigationBar.appearance().barTintColor = barColor
         UINavigationBar.appearance().tintColor = UIColor.white
@@ -43,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func applicationDidEnterBackground(_ application: UIApplication)
     {
         save()
+		videoViewController?.stop()
     }
 
     //**********************************************************************
@@ -50,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     //**********************************************************************
     func applicationWillEnterForeground(_ application: UIApplication)
     {
+		videoViewController?.start()
     }
 
     //**********************************************************************
@@ -73,16 +78,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     //**********************************************************************
     func load()
     {
+		// get the settings
         let userDefults = UserDefaults.standard
         if let data = userDefults.object(forKey: "settings") as? NSData
         {
             settings = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! Settings
         }
+			
+		// or create the default settings
         else
         {
             let data = NSKeyedArchiver.archivedData(withRootObject: settings);
             userDefults.set(data, forKey: "settings")
         }
+		
+		// get the list of cameras
         if let data = userDefults.object(forKey: "cameras") as? NSData
         {
             cameras = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! [Camera]
@@ -94,9 +104,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     //**********************************************************************
     func save()
     {
+		// save the settings
         let userDefults = UserDefaults.standard
         var data = NSKeyedArchiver.archivedData(withRootObject: settings);
         userDefults.set(data, forKey: "settings")
+		
+		// save the list of cameras
         data = NSKeyedArchiver.archivedData(withRootObject: cameras);
         userDefults.set(data, forKey: "cameras")
     }
@@ -120,18 +133,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     //**********************************************************************
     func getIntTextField(_ vc: UIViewController, _ intField: IntTextField, _ name: String) -> Int?
     {
+		// make sure there's a value
         guard let value = intField.value else
         {
             let message = String(format: "errorNoValue".local, name)
             error(vc, message)
             return nil
         }
+		
+		// make sure it's in range
         guard value >= intField.min && value <= intField.max else
         {
             let message = String(format: "errorValueOutOfRange".local, name, intField.min, intField.max)
             error(vc, message)
             return nil
         }
+		
+		// return the value
         return value
     }
     

@@ -44,11 +44,7 @@ class VideoViewController: UIViewController
 		view.isUserInteractionEnabled = true
 		view.backgroundColor = UIColor.black
 		nameLabel.text = camera!.name
-		statusLabel.text = "initializingVideo".local
 
-		// handle orientation changes
-		NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-		
 		// set up the tap and double tap gesture recognizers
 		let doubleTap = UITapGestureRecognizer(target: self, action: #selector(self.handleDoubleTapGesture(_:)))
 		doubleTap.numberOfTapsRequired = 2
@@ -66,19 +62,63 @@ class VideoViewController: UIViewController
 		view.addGestureRecognizer(pan)
 
 		// start reading the stream and passing the data to the video layer
+		app.videoViewController = self
+		start()
+	}
+	
+	//**********************************************************************
+	// start
+	//**********************************************************************
+	func start()
+	{
+		// set the status label
+		statusLabel.text = "initializingVideo".local
+		statusLabel.textColor = Utils.goodTextColor
+		statusLabel.isHidden = false
+
+		// start reading the stream and passing the data to the video layer
 		createVideoLayer()
 		createReadThread()
 		
 		// fade out after a while
 		startFadeOutTimer()
+
+		// start listening for orientation changes
+		NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
 	}
 	
 	//**********************************************************************
-	// deinit
+	// stop
 	//**********************************************************************
-	deinit
+	func stop()
 	{
+		// stop listening for orientation changes
 		NotificationCenter.default.removeObserver(self)
+		
+		// stop fading out the controls
+		stopFadeOutTimer()
+		
+		// wait for the read thread to stop
+		running = false
+		while !stopped
+		{
+			usleep(10000)
+		}
+		
+		// terminate the video processing
+		if let layer = videoLayer
+		{
+			layer.stopRequestingMediaData()
+			layer.flush()
+			layer.removeFromSuperlayer()
+			videoLayer = nil
+		}
+		destroyVideoSession()
+
+		// set the status label
+		statusLabel.text = "videoStopped".local
+		statusLabel.textColor = Utils.badTextColor
+		statusLabel.isHidden = false
 	}
 	
 	//**********************************************************************
@@ -96,23 +136,8 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	override func viewWillDisappear(_ animated: Bool)
 	{
-		// stop fading out the controls
-		stopFadeOutTimer()
-		
-		// wait for the read thread to stop
-		running = false
-		while !stopped
-		{
-			usleep(10000)
-		}
-		
-		// terminate the video processing
-		if let layer = videoLayer
-		{
-			layer.stopRequestingMediaData()
-			layer.flush()
-		}
-		destroyVideoSession()
+		app.videoViewController = nil
+		stop()
 	}
 
 	//**********************************************************************
