@@ -33,7 +33,7 @@ class LayerZoomPan
 	func reset()
 	{
 		// get the fitted view size
-		let viewSize = view.frame.size
+		let viewSize = view.bounds.size
 		let viewAspect = viewSize.height / viewSize.width
 		let videoAspect = videoSize.height / videoSize.width
 		if videoAspect < viewAspect
@@ -145,8 +145,8 @@ class LayerZoomPan
 	//**********************************************************************
 	func getMaxPan() -> CGPoint
 	{
-		let maxPan = CGPoint(x: max((fitSize.width * zoom - view.frame.width) / 2, 0),
-							 y: max((fitSize.height * zoom - view.frame.height) / 2, 0))
+		let maxPan = CGPoint(x: max((fitSize.width * zoom - view.bounds.width) / 2, 0),
+							 y: max((fitSize.height * zoom - view.bounds.height) / 2, 0))
 		return maxPan
 	}
 	
@@ -178,8 +178,8 @@ class LayerZoomPan
 		if gesture.state == UIGestureRecognizerState.began
 		{
 			zoomStart = zoom
-			zoomCenter.x = view.frame.width / 2
-			zoomCenter.y = view.frame.height / 2
+			zoomCenter.x = view.bounds.width / 2
+			zoomCenter.y = view.bounds.height / 2
 		}
 		
 		var newZoom = zoomStart * gesture.scale
