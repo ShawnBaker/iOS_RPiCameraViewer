@@ -106,6 +106,7 @@ class VideoViewController: UIViewController
 		}
 		
 		// terminate the video processing
+		destroyVideoSession()
 		if let layer = videoLayer
 		{
 			layer.stopRequestingMediaData()
@@ -113,7 +114,6 @@ class VideoViewController: UIViewController
 			layer.removeFromSuperlayer()
 			videoLayer = nil
 		}
-		destroyVideoSession()
 
 		// set the status label
 		statusLabel.text = "videoStopped".local
@@ -126,9 +126,12 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	@objc func orientationDidChange()
 	{
-		videoLayer?.frame = view.frame
-		videoLayer?.bounds = view.bounds
-		zoomPan?.reset()
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute:
+		{
+			self.videoLayer?.bounds = self.view.bounds
+			self.videoLayer?.frame = self.view.frame
+			self.zoomPan?.reset()
+		})
 	}
 	
 	//**********************************************************************
@@ -446,7 +449,10 @@ class VideoViewController: UIViewController
 			return false
 		}
 		let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription!)
-		zoomPan?.setVideoSize(CGFloat(dimensions.width), CGFloat(dimensions.height))
+		DispatchQueue.main.async
+		{
+			self.zoomPan?.setVideoSize(CGFloat(dimensions.width), CGFloat(dimensions.height))
+		}
 		
 		// create the decoder parameters
 		let decoderParameters = NSMutableDictionary()
