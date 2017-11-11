@@ -6,6 +6,9 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 	// outlets
 	@IBOutlet weak var tableView: UITableView!
 	
+	// constants
+	let SCAN_TIMEOUT = 0.5
+	
 	// instance variables
 	let cameraCellId = "CameraCell"
 	let emptyCellId = "EmptyCameraCell"
@@ -18,12 +21,22 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 	//**********************************************************************
 	override func viewDidLoad()
 	{
+		// initialize the views
 		super.viewDidLoad()
-		
-		getCameras()
-		
 		tableView.delegate = self
 		tableView.dataSource = self
+
+		// get the list of cameras
+		refreshCameras()
+		
+		// if there are no cameras then do a scan
+		if cameras.count == 0
+		{
+			DispatchQueue.main.asyncAfter(deadline: .now() + self.SCAN_TIMEOUT, execute:
+			{
+				self.performSegue(withIdentifier: "ScanForCameras", sender: self)
+			})
+		}
 	}
 
 	//**********************************************************************

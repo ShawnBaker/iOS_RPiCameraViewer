@@ -69,7 +69,7 @@
                         <barButtonItem key="backBarButtonItem" title="Cameras" id="oTl-0M-ny2"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="vni-Yg-rx4">
                             <connections>
-                                <segue destination="enJ-DX-OdW" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="lGo-yI-Fwi"/>
+                                <segue destination="enJ-DX-OdW" kind="presentation" identifier="ScanForCameras" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="lGo-yI-Fwi"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
@@ -940,6 +940,6 @@
         <image name="WhiteXButton" width="54" height="54"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="brW-cy-Gry"/>
+        <segue reference="fb7-j3-NTw"/>
     </inferredMetricsTieBreakers>
 </document>
