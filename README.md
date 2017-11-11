@@ -7,7 +7,8 @@ This program plays the raw H.264 video from a Raspberry Pi.
 Copyright &copy; 2016-2017 Shawn Baker using the [MIT License](https://opensource.org/licenses/MIT).
 
 Raspberry image by [Martin Bérubé](http://www.how-to-draw-funny-cartoons.com),
-camera image by [Oxygen Team](http://www.oxygen-icons.org).
+camera image by [Oxygen Team](http://www.oxygen-icons.org),
+tab bar icons by [icons8](https://icons8.com).
 
 ## Instructions
 
