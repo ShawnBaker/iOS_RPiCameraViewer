@@ -139,7 +139,7 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 		{
 			if segue.identifier == "CreateCamera"
 			{
-				let source = Source(address: Utils.getBaseIPAddress())
+				let source = Source(address: Utils.getBaseIPAddress(Utils.getIPAddress()))
 				vc.camera = Camera(Utils.getNetworkName(), Utils.getNextCameraName(app.cameras), source)
 				self.camera = vc.camera
 			}

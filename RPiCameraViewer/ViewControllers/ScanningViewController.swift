@@ -18,7 +18,7 @@ class ScanningViewController: UIViewController
 	
 	// variables
 	var network = Utils.getNetworkName()
-	var ipAddress = Utils.getIPAddress()
+	var wireless = Utils.getWirelessInterface()
 	var device = 0
 	var numDone = 0
 	var newCameras = [Camera]()
@@ -34,7 +34,7 @@ class ScanningViewController: UIViewController
 		progressView.progress = 0
 		progressView.transform = progressView.transform.scaledBy(x: 1, y: 2)
 		cancelButton.addTarget(self, action:#selector(handleCancelButtonTouchUpInside), for: .touchUpInside)
-		if network.isEmpty
+		if network.isEmpty || wireless.address.isEmpty
 		{
 			messageLabel.text = "notScanning".local
 			messageLabel.textColor = Utils.badTextColor
@@ -46,30 +46,26 @@ class ScanningViewController: UIViewController
 		{
 			messageLabel.text = String(format: "scanningOnPort".local, app.settings.source.port)
 			statusLabel.text = String(format: "newCamerasFound".local, 0)
-			
-			if !ipAddress.isEmpty
+			let baseAddress = Utils.getBaseIPAddress(wireless.address)
+			for _ in 1...NUM_THREADS
 			{
-				let octets = ipAddress.split(separator: ".")
-				for _ in 1...NUM_THREADS
+				DispatchQueue.global(qos: .background).async
 				{
-					DispatchQueue.global(qos: .background).async
+					var dev = self.getNextDevice()
+					while self.scanning && dev != self.NO_DEVICE
 					{
-						var dev: Int = self.getNextDevice()
-						while self.scanning && dev != self.NO_DEVICE
+						let address = baseAddress + String(dev)
+						if address != self.wireless.address
 						{
-							let address = String(format: "%@.%@.%@.%d", String(octets[0]), String(octets[1]), String(octets[2]), dev)
-							if address != self.ipAddress
+							let socket = openSocket(address, Int32(self.app.settings.source.port), Int32(self.app.settings.scanTimeout))
+							if (socket >= 0)
 							{
-								let socket = openSocket(address, Int32(self.app.settings.source.port), Int32(self.app.settings.scanTimeout))
-								if (socket >= 0)
-								{
-									self.addCamera(address)
-									closeSocket(socket)
-								}
+								self.addCamera(address)
+								closeSocket(socket)
 							}
-							self.doneDevice(dev);
-							dev = self.getNextDevice()
 						}
+						self.doneDevice(dev)
+						dev = self.getNextDevice()
 					}
 				}
 			}
@@ -124,12 +120,12 @@ class ScanningViewController: UIViewController
 			if camera.network == self.network && camera.source.address == address && camera.source.port == self.app.settings.source.port
 			{
 				found = true
-				break;
+				break
 			}
 		}
 		if !found
 		{
-			//Log.info("addCamera: " + newCamera.source.toString());
+			//Log.info("addCamera: " + newCamera.source.toString())
 			let camera = Camera(self.network, "", Source(address: address))
 			self.newCameras.append(camera)
 		}
@@ -144,20 +140,20 @@ class ScanningViewController: UIViewController
 		if newCameras.count > 0
 		{
 			// sort the new cameras by IP address
-			//Log.info("addCameras");
+			//Log.info("addCameras")
 			newCameras.sort(by: compareCameras)
 			
 			// get the maximum number from the existing camera names
-			var max = Utils.getMaxCameraNumber(app.cameras);
+			var max = Utils.getMaxCameraNumber(app.cameras)
 			
 			// set the camera names and add the new cameras to the list of all cameras
-			let defaultName = app.settings.cameraName + " ";
+			let defaultName = app.settings.cameraName + " "
 			for camera in newCameras
 			{
 				max += 1
-				camera.name = defaultName + String(max);
-				app.cameras.append(camera);
-				//Log.info("camera: " + camera.toString());
+				camera.name = defaultName + String(max)
+				app.cameras.append(camera)
+				//Log.info("camera: " + camera.toString())
 			}
 			
 			app.save()

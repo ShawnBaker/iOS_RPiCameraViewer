@@ -31,11 +31,11 @@ class Utils
 	}
 	
 	//**********************************************************************
-	// getIPAddress
+	// getNetworkInterfaces
 	//**********************************************************************
-	class func getIPAddress() -> String
+	class func getNetworkInterfaces() -> [NetworkInterface]
 	{
-		var address = ""
+		var interfaces = [NetworkInterface]()
 		var ifaddr: UnsafeMutablePointer<ifaddrs>? = nil
 		if getifaddrs(&ifaddr) == 0
 		{
@@ -44,35 +44,65 @@ class Utils
 			{
 				defer { ptr = ptr?.pointee.ifa_next }
 				
-				let interface = ptr?.pointee
-				let addrFamily = interface?.ifa_addr.pointee.sa_family
-				if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6)
+				if let interface = ptr?.pointee
 				{
-					let name: String = String(cString: (interface?.ifa_name)!)
-					if name == "en0"
+					let family = interface.ifa_addr.pointee.sa_family
+					if family == UInt8(AF_INET) || family == UInt8(AF_INET6)
 					{
-						var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
-						getnameinfo(interface?.ifa_addr, socklen_t((interface?.ifa_addr.pointee.sa_len)!), &hostname, socklen_t(hostname.count), nil, socklen_t(0), NI_NUMERICHOST)
-						address = String(cString: hostname)
+						let flags = interface.ifa_flags
+						let name = String(cString: (interface.ifa_name)!)
+						var cAddress = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+						getnameinfo(interface.ifa_addr, socklen_t(interface.ifa_addr.pointee.sa_len), &cAddress, socklen_t(cAddress.count), nil, socklen_t(0), NI_NUMERICHOST)
+						let address = String(cString: cAddress)
+						var cNetmask = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+						getnameinfo(interface.ifa_netmask, socklen_t(interface.ifa_netmask.pointee.sa_len), &cNetmask, socklen_t(cNetmask.count), nil, socklen_t(0), NI_NUMERICHOST)
+						let netmask = String(cString: cNetmask)
+						interfaces.append(NetworkInterface(name, flags, family, address, netmask))
 					}
 				}
 			}
 			freeifaddrs(ifaddr)
 		}
-		return address
+		return interfaces
+	}
+	
+	//**********************************************************************
+	// getWirelessAddress
+	//**********************************************************************
+	class func getWirelessInterface() -> NetworkInterface
+	{
+		let upAndRunning = UInt32(IFF_UP | IFF_RUNNING)
+		let interfaces = getNetworkInterfaces()
+		for interface in interfaces
+		{
+			if interface.name == "en0" && interface.family == UInt8(AF_INET) &&
+				(interface.flags & upAndRunning) == upAndRunning
+			{
+				return interface
+			}
+		}
+		return NetworkInterface()
+	}
+	
+	//**********************************************************************
+	// getIPAddress
+	//**********************************************************************
+	class func getIPAddress() -> String
+	{
+		return getWirelessInterface().address
 	}
 
 	//**********************************************************************
 	// getBaseIPAddress
 	//**********************************************************************
-	class func getBaseIPAddress() -> String
+	class func getBaseIPAddress(_ ipAddress: String) -> String
 	{
-		var ipAddress = getIPAddress();
-		if let i = ipAddress.range(of: ".", options: .backwards)?.lowerBound
+		var address = ipAddress
+		if !address.isEmpty, let i = address.range(of: ".", options: .backwards)?.lowerBound
 		{
-			ipAddress = String(ipAddress[...i])
+			address = String(address[...i])
 		}
-		return ipAddress;
+		return address
 	}
 
 	//**********************************************************************
@@ -104,7 +134,7 @@ class Utils
 			}
 		}
 	
-		return networkCameras;
+		return networkCameras
 	}
 
 	//**********************************************************************
@@ -122,7 +152,7 @@ class Utils
 	class func getMaxCameraNumber(_ cameras: [Camera]) -> Int
 	{
 		var max = 0
-		let defaultName = getDefaultCameraName() + " ";
+		let defaultName = getDefaultCameraName() + " "
 		for camera in cameras
 		{
 			if camera.name.hasPrefix(defaultName)
@@ -134,7 +164,7 @@ class Utils
 				}
 			}
 		}
-		return max;
+		return max
 	}
 	
 	//**********************************************************************
@@ -142,6 +172,6 @@ class Utils
 	//**********************************************************************
 	class func getNextCameraName(_ cameras: [Camera]) -> String
 	{
-		return getDefaultCameraName() + " " + String(getMaxCameraNumber(cameras) + 1);
+		return getDefaultCameraName() + " " + String(getMaxCameraNumber(cameras) + 1)
 	}
 }
