@@ -174,4 +174,17 @@ class Utils
 	{
 		return getDefaultCameraName() + " " + String(getMaxCameraNumber(cameras) + 1)
 	}
+	
+	//**********************************************************************
+	// getSnapshot
+	//**********************************************************************
+	class func getSnapshot(_ view: UIView) -> UIImage?
+	{
+		var image: UIImage? = nil
+		UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
+		view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+		image = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		return image;
+	}
 }

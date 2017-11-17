@@ -13,6 +13,7 @@ class VideoViewController: UIViewController
 	let FADE_IN_INTERVAL = 0.1
 
 	// outlets
+	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var statusLabel: UILabel!
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var backButton: UIButton!
@@ -22,11 +23,10 @@ class VideoViewController: UIViewController
 	var camera: Camera?
 	var fadeOutTimer: Timer?
 	var running = false
-	var stopped = false
-	var takeSnapshot = false
-	var zoomPan: LayerZoomPan?
+	var close = false
+	var dispatchGroup = DispatchGroup()
+	var zoomPan: ZoomPan?
 	let app = UIApplication.shared.delegate as! AppDelegate
-	var videoLayer: AVSampleBufferDisplayLayer?
 	var formatDescription: CMVideoFormatDescription?
 	var videoSession: VTDecompressionSession?
 	var fullsps: [UInt8]?
@@ -41,10 +41,9 @@ class VideoViewController: UIViewController
 	{
 		// initialize the view and controls
 		super.viewDidLoad()
-		view.isUserInteractionEnabled = true
-		view.backgroundColor = UIColor.black
 		nameLabel.text = camera!.name
-
+		zoomPan = ZoomPan(imageView)
+		
 		// set up the tap and double tap gesture recognizers
 		let doubleTap = UITapGestureRecognizer(target: self, action: #selector(self.handleDoubleTapGesture(_:)))
 		doubleTap.numberOfTapsRequired = 2
@@ -55,9 +54,9 @@ class VideoViewController: UIViewController
 		view.addGestureRecognizer(tap)
 
 		// set up the pinch and pan gesture recognizers
-		let pinch = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinchGesture(_:)))
+		let pinch = UIPinchGestureRecognizer(target: zoomPan, action: #selector(zoomPan!.handlePinchGesture(_:)))
 		view.addGestureRecognizer(pinch)
-		let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(_:)))
+		let pan = UIPanGestureRecognizer(target: zoomPan, action: #selector(zoomPan!.handlePanGesture(_:)))
 		pan.maximumNumberOfTouches = 2
 		view.addGestureRecognizer(pan)
 
@@ -75,9 +74,9 @@ class VideoViewController: UIViewController
 		statusLabel.text = "initializingVideo".local
 		statusLabel.textColor = Utils.goodTextColor
 		statusLabel.isHidden = false
+		imageView.image = nil
 
-		// start reading the stream and passing the data to the video layer
-		createVideoLayer()
+		// start reading the stream and decoding the video
 		createReadThread()
 		
 		// fade out after a while
@@ -92,33 +91,33 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	func stop()
 	{
+		running = false
+	}
+	
+	//**********************************************************************
+	// stopVideo
+	//**********************************************************************
+	func stopVideo()
+	{
 		// stop listening for orientation changes
 		NotificationCenter.default.removeObserver(self)
 		
 		// stop fading out the controls
 		stopFadeOutTimer()
 		
-		// wait for the read thread to stop
-		running = false
-		while !stopped
-		{
-			usleep(10000)
-		}
-		
 		// terminate the video processing
 		destroyVideoSession()
-		if let layer = videoLayer
-		{
-			layer.stopRequestingMediaData()
-			layer.flush()
-			layer.removeFromSuperlayer()
-			videoLayer = nil
-		}
-
+		
 		// set the status label
 		statusLabel.text = "videoStopped".local
 		statusLabel.textColor = Utils.badTextColor
 		statusLabel.isHidden = false
+		
+		// close the controller if necessary
+		if close
+		{
+			dismiss(animated: true)
+		}
 	}
 	
 	//**********************************************************************
@@ -128,8 +127,6 @@ class VideoViewController: UIViewController
 	{
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute:
 		{
-			self.videoLayer?.bounds = self.view.bounds
-			self.videoLayer?.frame = self.view.frame
 			self.zoomPan?.reset()
 		})
 	}
@@ -140,7 +137,6 @@ class VideoViewController: UIViewController
 	override func viewWillDisappear(_ animated: Bool)
 	{
 		app.videoViewController = nil
-		stop()
 	}
 
 	//**********************************************************************
@@ -148,7 +144,15 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	@IBAction func handleBackButtonTouchUpInside(_ sender: Any)
 	{
-		dismiss(animated: true)
+		if running
+		{
+			close = true
+			stop()
+		}
+		else
+		{
+			dismiss(animated: true)
+		}
 	}
 
 	//**********************************************************************
@@ -156,9 +160,23 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	@IBAction func handleSnapshotButtonTouchUpInside(_ sender: Any)
 	{
-		snapshotButton.isEnabled = false
-		takeSnapshot = true
 		startFadeOutTimer()
+		
+		// hide the controls
+		self.nameLabel.isHidden = true
+		self.backButton.isHidden = true
+		self.snapshotButton.isHidden = true
+		
+		// take the snapshot
+		if let uiImage = Utils.getSnapshot(view)
+		{
+			UIImageWriteToSavedPhotosAlbum(uiImage, self, #selector(imageSaved(_:didFinishSavingWithError:contextInfo:)), nil)
+		}
+		
+		// show the controls
+		self.nameLabel.isHidden = false
+		self.backButton.isHidden = false
+		self.snapshotButton.isHidden = false
 	}
 
 	//**********************************************************************
@@ -175,22 +193,6 @@ class VideoViewController: UIViewController
 	@objc func handleDoubleTapGesture(_ tap: UITapGestureRecognizer)
 	{
 		zoomPan?.setZoomPan(1, CGPoint.zero)
-	}
-	
-	//**********************************************************************
-	// handlePinchGesture
-	//**********************************************************************
-	@objc func handlePinchGesture(_ pinch: UIPinchGestureRecognizer)
-	{
-		zoomPan?.handlePinchGesture(pinch)
-	}
-	
-	//**********************************************************************
-	// handlePanGesture
-	//**********************************************************************
-	@objc func handlePanGesture(_ pan: UIPanGestureRecognizer)
-	{
-		zoomPan?.handlePanGesture(pan)
 	}
 	
 	//**********************************************************************
@@ -247,33 +249,6 @@ class VideoViewController: UIViewController
 	}
 	
 	//**********************************************************************
-	// createVideoLayer
-	//**********************************************************************
-	func createVideoLayer()
-	{
-		if videoLayer == nil
-		{
-			videoLayer = AVSampleBufferDisplayLayer()
-			if let layer = videoLayer
-			{
-				layer.frame = view.frame
-				layer.bounds = view.bounds
-				layer.position = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
-				layer.videoGravity = AVLayerVideoGravity.resizeAspect
-				layer.backgroundColor = UIColor.black.cgColor
-
-				view.layer.addSublayer(layer)
-				view.bringSubview(toFront: statusLabel)
-				view.bringSubview(toFront: nameLabel)
-				view.bringSubview(toFront: backButton)
-				view.bringSubview(toFront: snapshotButton)
-
-				zoomPan = LayerZoomPan(view, layer)
-			}
-		}
-	}
-	
-	//**********************************************************************
 	// createReadThread
 	//**********************************************************************
 	func createReadThread()
@@ -282,7 +257,11 @@ class VideoViewController: UIViewController
 		{
 			DispatchQueue.global(qos: .background).async
 			{
-				self.stopped = false
+				self.dispatchGroup.enter()
+				self.dispatchGroup.notify(queue: .main)
+				{
+					self.stopVideo()
+				}
 				let socket = openSocket(self.camera!.source.address, Int32(self.app.settings.source.port), Int32(self.app.settings.scanTimeout))
 				if (socket >= 0)
 				{
@@ -344,7 +323,7 @@ class VideoViewController: UIViewController
 					}
 					closeSocket(socket)
 				}
-				self.stopped = true
+				self.dispatchGroup.leave()
 			}
 		}
 	}
@@ -419,17 +398,11 @@ class VideoViewController: UIViewController
 								 Unmanaged.passUnretained(kCFBooleanTrue).toOpaque())
 		}
 		
-		// pass the sample buffer to the video layer
-		if let buffer = sampleBuffer, let layer = videoLayer, layer.isReadyForMoreMediaData
+		// pass the sample buffer to the decoder
+		if let buffer = sampleBuffer, CMSampleBufferGetNumSamples(buffer) > 0
 		{
-			if takeSnapshot
-			{
-				var infoFlags = VTDecodeInfoFlags(rawValue: 0)
-				status = VTDecompressionSessionDecodeFrame(videoSession!, buffer, [._EnableAsynchronousDecompression], nil, &infoFlags)
-			}
-			
-			layer.enqueue(buffer)
-			layer.setNeedsDisplay()
+			var infoFlags = VTDecodeInfoFlags(rawValue: 0)
+			status = VTDecompressionSessionDecodeFrame(videoSession!, buffer, [._EnableAsynchronousDecompression], nil, &infoFlags)
 		}
 		return true
 	}
@@ -474,9 +447,10 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	func destroyVideoSession()
 	{
-		if videoSession != nil
+		if let session = videoSession
 		{
-			VTDecompressionSessionInvalidate(videoSession!)
+			VTDecompressionSessionWaitForAsynchronousFrames(session)
+			VTDecompressionSessionInvalidate(session)
 			videoSession = nil
 		}
 		sps = nil
@@ -489,7 +463,7 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	func decompressionCallback(_ sourceFrameRefCon: UnsafeMutableRawPointer?, _ status: OSStatus, _ infoFlags: VTDecodeInfoFlags, _ imageBuffer: CVImageBuffer?, _ presentationTimeStamp: CMTime, _ presentationDuration: CMTime)
 	{
-		if takeSnapshot, let cvImageBuffer = imageBuffer
+		if running, let cvImageBuffer = imageBuffer
 		{
 			let ciImage = CIImage(cvImageBuffer: cvImageBuffer)
 			let size = CVImageBufferGetEncodedSize(cvImageBuffer)
@@ -497,12 +471,10 @@ class VideoViewController: UIViewController
 			if let cgImage = context.createCGImage(ciImage, from: CGRect(origin: CGPoint.zero, size: size))
 			{
 				let uiImage = UIImage(cgImage: cgImage)
-				UIImageWriteToSavedPhotosAlbum(uiImage, self, #selector(imageSaved(_:didFinishSavingWithError:contextInfo:)), nil)
-			}
-			takeSnapshot = false
-			DispatchQueue.main.async
-			{
-				self.snapshotButton.isEnabled = true
+				DispatchQueue.main.async
+				{
+					self.imageView.image = uiImage
+				}
 			}
 		}
 	}

@@ -1,30 +1,25 @@
-// Copyright © 2016-2017 Shawn Baker using the MIT License.
+// Copyright © 2017 Shawn Baker using the MIT License.
 import Foundation
 import UIKit
 
-class LayerZoomPan
+class ZoomPan
 {
 	// instance variables
 	var view: UIView
-	var layer: CALayer
-	var minZoom: CGFloat = 0.1
+	var minZoom: CGFloat = 1
 	var maxZoom: CGFloat = 10.0
 	var videoSize = CGSize.zero
 	var fitSize = CGSize.zero
 	var zoom: CGFloat = 1
 	var pan = CGPoint.zero
 	var panStart = CGPoint.zero
-	var zoomStart: CGFloat = 1
-	var zoomCenter = CGPoint.zero
 
 	//**********************************************************************
 	// init
 	//**********************************************************************
-	init(_ view: UIView, _ layer: CALayer)
+	init(_ view: UIView)
 	{
 		self.view = view
-		self.layer = layer
-		layer.actions = ["transform": NSNull()]
 	}
 	
 	//**********************************************************************
@@ -47,11 +42,8 @@ class LayerZoomPan
 			fitSize.height = viewSize.height
 		}
 		
-		// set the layer position
-		layer.position = CGPoint(x: viewSize.width / 2, y: viewSize.height / 2)
-		
-		// clear the transform
-		setZoomPan(1, CGPoint.zero)
+		// initialize the zoom and pan
+		setZoomPan(zoom, pan)
 	}
 	
 	//**********************************************************************
@@ -82,7 +74,7 @@ class LayerZoomPan
 	//**********************************************************************
 	func setZoom(_ zoom: CGFloat)
 	{
-		self.zoom = zoom
+		self.zoom = max(minZoom, min(zoom, maxZoom))
 		checkPan()
 		setTransform()
 	}
@@ -110,7 +102,7 @@ class LayerZoomPan
 	//**********************************************************************
 	func setZoomPan(_ zoom: CGFloat, _ pan: CGPoint)
 	{
-		self.zoom = zoom
+		self.zoom = max(minZoom, min(zoom, maxZoom))
 		self.pan = pan
 		checkPan()
 		setTransform()
@@ -127,7 +119,7 @@ class LayerZoomPan
 	//**********************************************************************
 	// checkPan
 	//**********************************************************************
-	func checkPan()
+	private func checkPan()
 	{
 		let maxPan = getMaxPan()
 
@@ -143,60 +135,42 @@ class LayerZoomPan
 	//**********************************************************************
 	// getMaxPan
 	//**********************************************************************
-	func getMaxPan() -> CGPoint
+	private func getMaxPan() -> CGPoint
 	{
-		let maxPan = CGPoint(x: max((fitSize.width * zoom - view.bounds.width) / 2, 0),
-							 y: max((fitSize.height * zoom - view.bounds.height) / 2, 0))
+		let maxPan = CGPoint(x: max((fitSize.width * zoom - view.bounds.width) / 2 / zoom, 0),
+							 y: max((fitSize.height * zoom - view.bounds.height) / 2 / zoom, 0))
 		return maxPan
 	}
 	
 	//**********************************************************************
 	// setTransform
 	//**********************************************************************
-	func setTransform()
+	private func setTransform()
 	{
-		var transform = CATransform3DIdentity
-		
-		// add the panning
-		if (pan.x != 0 || pan.y != 0)
-		{
-			transform = CATransform3DTranslate(transform, pan.x, pan.y, 0)
-		}
-		
-		// scale relative to the center
-		transform = CATransform3DScale(transform, zoom, zoom, 1)
-
-		// set the transform
-		layer.transform = transform
+		view.transform = CGAffineTransform.init(scaleX: zoom, y: zoom).translatedBy(x: pan.x, y: pan.y)
 	}
 	
 	//**********************************************************************
 	// handlePinchGesture
 	//**********************************************************************
-	func handlePinchGesture(_ gesture: UIPinchGestureRecognizer)
+	@objc func handlePinchGesture(_ gesture: UIPinchGestureRecognizer)
 	{
-		if gesture.state == UIGestureRecognizerState.began
-		{
-			zoomStart = zoom
-			zoomCenter.x = view.bounds.width / 2
-			zoomCenter.y = view.bounds.height / 2
-		}
-		
-		var newZoom = zoomStart * gesture.scale
+		var newZoom = zoom * gesture.scale
 		newZoom = max(minZoom, min(newZoom, maxZoom))
 		if newZoom != zoom
 		{
+			let diff = (newZoom / zoom) - 1
 			let location = gesture.location(in: view)
-			let offset = CGPoint(x: location.x - zoomCenter.x, y: location.y - zoomCenter.y)
-			let focus = CGPoint(x: (offset.x - pan.x) / zoom, y: (offset.y - pan.y) / zoom)
-			setZoomPan(newZoom, offset.x - focus.x * newZoom, offset.y - focus.y * newZoom)
+			let offset = CGPoint(x: location.x - view.bounds.midX + pan.x, y: location.y - view.bounds.midY + pan.y)
+			setZoomPan(newZoom, pan.x - offset.x * diff, pan.y - offset.y * diff)
 		}
+		gesture.scale = 1
 	}
-	
+
 	//**********************************************************************
 	// handlePanGesture
 	//**********************************************************************
-	func handlePanGesture(_ gesture: UIPanGestureRecognizer)
+	@objc func handlePanGesture(_ gesture: UIPanGestureRecognizer)
 	{
 		if gesture.state == UIGestureRecognizerState.began
 		{

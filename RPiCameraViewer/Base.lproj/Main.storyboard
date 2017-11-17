@@ -597,6 +597,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wKK-f5-LNY">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Initializing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbH-wk-13d">
                                 <rect key="frame" x="81.5" y="224" width="158.5" height="33.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
@@ -624,12 +628,16 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="wKK-f5-LNY" firstAttribute="leading" secondItem="ncH-Kj-E9L" secondAttribute="leading" id="37i-gD-dqC"/>
                             <constraint firstItem="2py-Uc-SHk" firstAttribute="bottom" secondItem="4bE-Xg-iG8" secondAttribute="top" constant="-8" id="3p8-kT-euW"/>
                             <constraint firstItem="xC6-6T-JHv" firstAttribute="top" secondItem="U3u-Oy-fLo" secondAttribute="bottom" constant="8" id="69D-Uh-kfC"/>
+                            <constraint firstItem="wKK-f5-LNY" firstAttribute="top" secondItem="ncH-Kj-E9L" secondAttribute="top" id="9NR-3p-SUS"/>
                             <constraint firstItem="hbH-wk-13d" firstAttribute="centerX" secondItem="ncH-Kj-E9L" secondAttribute="centerX" id="DAA-7H-49C"/>
+                            <constraint firstItem="4bE-Xg-iG8" firstAttribute="top" secondItem="wKK-f5-LNY" secondAttribute="bottom" id="Mzx-6b-U2L"/>
                             <constraint firstItem="xC6-6T-JHv" firstAttribute="trailing" secondItem="ncH-Kj-E9L" secondAttribute="trailing" constant="-8" id="WQ6-CK-PzA"/>
+                            <constraint firstAttribute="trailing" secondItem="wKK-f5-LNY" secondAttribute="trailing" id="ahE-oi-eo0"/>
                             <constraint firstItem="hbH-wk-13d" firstAttribute="centerY" secondItem="ncH-Kj-E9L" secondAttribute="centerY" id="amB-EW-qYH"/>
                             <constraint firstItem="Y1C-1W-af1" firstAttribute="leading" secondItem="ncH-Kj-E9L" secondAttribute="leading" constant="8" id="d7G-13-0JQ"/>
                             <constraint firstItem="Y1C-1W-af1" firstAttribute="bottom" secondItem="4bE-Xg-iG8" secondAttribute="top" constant="-4" id="kdw-RF-sXv"/>
@@ -639,6 +647,7 @@
                     <navigationItem key="navigationItem" title="Video" id="5oG-aS-kGi"/>
                     <connections>
                         <outlet property="backButton" destination="xC6-6T-JHv" id="Ggz-e2-CYJ"/>
+                        <outlet property="imageView" destination="wKK-f5-LNY" id="Xx3-jL-Oyp"/>
                         <outlet property="nameLabel" destination="Y1C-1W-af1" id="Yso-OG-I1v"/>
                         <outlet property="snapshotButton" destination="2py-Uc-SHk" id="0xt-GG-kRf"/>
                         <outlet property="statusLabel" destination="hbH-wk-13d" id="3jf-wS-KNj"/>
