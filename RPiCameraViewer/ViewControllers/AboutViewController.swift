@@ -21,9 +21,12 @@ class AboutViewController: UIViewController
 		navigationBar.items = [navigationItem]
 		
         appNameLabel.text = "appName".local
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+			let buildStr = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
+			let build = Int(buildStr)
         {
-            versionLabel.text = String(format: "version".local, version)
+			let format = (build > 1) ? "versionBuild" : "version"
+            versionLabel.text = String(format: format.local, version, buildStr)
         }
         infoTextView.attributedText = "aboutInfo".local.htmlAttr
     }
