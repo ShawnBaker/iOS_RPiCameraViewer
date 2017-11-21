@@ -2,6 +2,7 @@
 import UIKit
 import AVFoundation
 import VideoToolbox
+import Photos
 
 class VideoViewController: UIViewController
 {
@@ -166,6 +167,36 @@ class VideoViewController: UIViewController
 	{
 		startFadeOutTimer()
 		
+		// check permissions
+		let status = PHPhotoLibrary.authorizationStatus()
+		if status == .authorized
+		{
+			takeSnapshot()
+		}
+		else if status == .notDetermined
+		{
+			PHPhotoLibrary.requestAuthorization()
+			{ status in
+				if status == .authorized
+				{
+					DispatchQueue.main.async
+					{
+						self.takeSnapshot()
+					}
+				}
+			}
+		}
+		else
+		{
+			Utils.error(self, "errorNotAuthorizedToSavePhotos")
+		}
+	}
+	
+	//**********************************************************************
+	// takeSnapshot
+	//**********************************************************************
+	func takeSnapshot()
+	{
 		// hide the controls
 		self.nameLabel.isHidden = true
 		self.closeButton.isHidden = true

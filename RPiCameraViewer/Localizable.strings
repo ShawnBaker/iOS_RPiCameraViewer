@@ -4,6 +4,7 @@ errorNameAlreadyExists = "The camera name already exists.";
 errorNoAddress = "You must enter an address.";
 errorNoName = "You must enter a name.";
 errorNoNetwork = "There is no network to scan.";
+errorNotAuthorizedToSavePhotos = "This app is not authorized to save photos to the Photo Library.";
 errorNoValue = "You must enter a %@.";
 errorValueOutOfRange = "The %@ must be between %d and %d.";
 
