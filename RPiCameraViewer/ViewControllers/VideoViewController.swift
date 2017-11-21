@@ -16,7 +16,7 @@ class VideoViewController: UIViewController
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var statusLabel: UILabel!
 	@IBOutlet weak var nameLabel: UILabel!
-	@IBOutlet weak var backButton: UIButton!
+	@IBOutlet weak var closeButton: UIButton!
 	@IBOutlet weak var snapshotButton: UIButton!
 	
 	// instance variables
@@ -60,6 +60,9 @@ class VideoViewController: UIViewController
 		pan.maximumNumberOfTouches = 2
 		view.addGestureRecognizer(pan)
 
+		// don't let the device dim or sleep while showing video
+		UIApplication.shared.isIdleTimerDisabled = true
+		
 		// start reading the stream and passing the data to the video layer
 		app.videoViewController = self
 		start()
@@ -136,13 +139,14 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	override func viewWillDisappear(_ animated: Bool)
 	{
+		UIApplication.shared.isIdleTimerDisabled = false
 		app.videoViewController = nil
 	}
 
 	//**********************************************************************
-	// handleBackButtonTouchUpInside
+	// handleCloseButtonTouchUpInside
 	//**********************************************************************
-	@IBAction func handleBackButtonTouchUpInside(_ sender: Any)
+	@IBAction func handleCloseButtonTouchUpInside(_ sender: Any)
 	{
 		if running
 		{
@@ -164,7 +168,7 @@ class VideoViewController: UIViewController
 		
 		// hide the controls
 		self.nameLabel.isHidden = true
-		self.backButton.isHidden = true
+		self.closeButton.isHidden = true
 		self.snapshotButton.isHidden = true
 		
 		// take the snapshot
@@ -175,7 +179,7 @@ class VideoViewController: UIViewController
 		
 		// show the controls
 		self.nameLabel.isHidden = false
-		self.backButton.isHidden = false
+		self.closeButton.isHidden = false
 		self.snapshotButton.isHidden = false
 	}
 
@@ -226,7 +230,7 @@ class VideoViewController: UIViewController
 		{
 			self.statusLabel.alpha = 1.0
 			self.nameLabel.alpha = 1.0
-			self.backButton.alpha = 1.0
+			self.closeButton.alpha = 1.0
 			self.snapshotButton.alpha = 1.0
 		},
 		completion: { (Bool) -> Void in self.startFadeOutTimer() })
@@ -242,7 +246,7 @@ class VideoViewController: UIViewController
 		{
 			self.statusLabel.alpha = 0.0
 			self.nameLabel.alpha = 0.0
-			self.backButton.alpha = 0.0
+			self.closeButton.alpha = 0.0
 			self.snapshotButton.alpha = 0.0
 		},
 		completion: nil)
