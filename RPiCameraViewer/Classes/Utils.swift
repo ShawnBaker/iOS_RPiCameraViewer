@@ -187,4 +187,39 @@ class Utils
 		UIGraphicsEndImageContext()
 		return image;
 	}
+	
+	//**********************************************************************
+	// getIntTextField
+	//**********************************************************************
+	class func getIntTextField(_ vc: UIViewController, _ intField: IntTextField, _ name: String) -> Int?
+	{
+		// make sure there's a value
+		guard let value = intField.value else
+		{
+			let message = String(format: "errorNoValue".local, name)
+			error(vc, message)
+			return nil
+		}
+		
+		// make sure it's in range
+		guard value >= intField.min && value <= intField.max else
+		{
+			let message = String(format: "errorValueOutOfRange".local, name, intField.min, intField.max)
+			error(vc, message)
+			return nil
+		}
+		
+		// return the value
+		return value
+	}
+
+	//**********************************************************************
+	// error
+	//**********************************************************************
+	class func error(_ vc: UIViewController, _ message: String)
+	{
+		let alert = UIAlertController(title: "error".local, message: message.local, preferredStyle: UIAlertControllerStyle.alert)
+		alert.addAction(UIAlertAction(title: "ok".local, style: UIAlertActionStyle.default, handler: nil))
+		vc.present(alert, animated: true, completion: nil)
+	}
 }

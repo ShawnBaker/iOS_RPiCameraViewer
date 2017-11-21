@@ -33,14 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     }
 
     //**********************************************************************
-    // applicationWillResignActive
-    //**********************************************************************
-    func applicationWillResignActive(_ application: UIApplication)
-    {
-        pause()
-    }
-
-    //**********************************************************************
     // applicationDidEnterBackground
     //**********************************************************************
     func applicationDidEnterBackground(_ application: UIApplication)
@@ -55,14 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func applicationWillEnterForeground(_ application: UIApplication)
     {
 		videoViewController?.start()
-    }
-
-    //**********************************************************************
-    // applicationDidBecomeActive
-    //**********************************************************************
-    func applicationDidBecomeActive(_ application: UIApplication)
-    {
-        resume()
     }
 
     //**********************************************************************
@@ -112,55 +96,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		// save the list of cameras
         data = NSKeyedArchiver.archivedData(withRootObject: cameras);
         userDefults.set(data, forKey: "cameras")
-    }
-    
-    //**********************************************************************
-    // pause
-    //**********************************************************************
-    func pause()
-    {
-    }
-    
-    //**********************************************************************
-    // resume
-    //**********************************************************************
-    func resume()
-    {
-    }
-    
-    //**********************************************************************
-    // getIntTextField
-    //**********************************************************************
-    func getIntTextField(_ vc: UIViewController, _ intField: IntTextField, _ name: String) -> Int?
-    {
-		// make sure there's a value
-        guard let value = intField.value else
-        {
-            let message = String(format: "errorNoValue".local, name)
-            error(vc, message)
-            return nil
-        }
-		
-		// make sure it's in range
-        guard value >= intField.min && value <= intField.max else
-        {
-            let message = String(format: "errorValueOutOfRange".local, name, intField.min, intField.max)
-            error(vc, message)
-            return nil
-        }
-		
-		// return the value
-        return value
-    }
-    
-    //**********************************************************************
-    // error
-    //**********************************************************************
-    func error(_ vc: UIViewController, _ message: String)
-    {
-        let alert = UIAlertController(title: "error".local, message: message.local, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "ok".local, style: UIAlertActionStyle.default, handler: nil))
-        vc.present(alert, animated: true, completion: nil)
     }
 }
 
