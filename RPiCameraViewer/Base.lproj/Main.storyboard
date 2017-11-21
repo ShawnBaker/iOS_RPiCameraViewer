@@ -602,7 +602,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Initializing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbH-wk-13d">
-                                <rect key="frame" x="81.5" y="224" width="158.5" height="33.5"/>
+                                <rect key="frame" x="81" y="223.5" width="158.5" height="33.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                 <color key="textColor" red="0.0" green="0.75294117647058822" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -624,7 +624,7 @@
                                 <rect key="frame" x="258" y="28" width="54" height="54"/>
                                 <state key="normal" image="WhiteXButton"/>
                                 <connections>
-                                    <action selector="handleBackButtonTouchUpInside:" destination="jNo-GP-uKv" eventType="touchUpInside" id="ncu-5M-FMV"/>
+                                    <action selector="handleCloseButtonTouchUpInside:" destination="jNo-GP-uKv" eventType="touchUpInside" id="ncu-5M-FMV"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -646,7 +646,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Video" id="5oG-aS-kGi"/>
                     <connections>
-                        <outlet property="backButton" destination="xC6-6T-JHv" id="Ggz-e2-CYJ"/>
+                        <outlet property="closeButton" destination="xC6-6T-JHv" id="Ggz-e2-CYJ"/>
                         <outlet property="imageView" destination="wKK-f5-LNY" id="Xx3-jL-Oyp"/>
                         <outlet property="nameLabel" destination="Y1C-1W-af1" id="Yso-OG-I1v"/>
                         <outlet property="snapshotButton" destination="2py-Uc-SHk" id="0xt-GG-kRf"/>
