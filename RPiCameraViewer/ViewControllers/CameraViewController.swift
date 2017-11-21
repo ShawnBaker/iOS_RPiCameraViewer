@@ -61,29 +61,29 @@ class CameraViewController: InputViewController
             // error check the input values
             guard let name = nameTextField.text, name.length > 0 else
             {
-                app.error(self, "errorNoName")
+                Utils.error(self, "errorNoName")
                 return false
             }
             guard name == camera.name || !app.cameras.contains(where: {$0.name == name}) else
             {
-                app.error(self, "errorNameAlreadyExists")
+                Utils.error(self, "errorNameAlreadyExists")
                 return false
             }
             guard let address = addressTextField.text, address.length > 0 else
             {
-                app.error(self, "errorNoAddress")
+                Utils.error(self, "errorNoAddress")
                 return false
             }
 			guard Utils.isValidIPAddress(address) else
 			{
-				app.error(self, "errorBadAddress")
+				Utils.error(self, "errorBadAddress")
 				return false
 			}
-            guard let port = app.getIntTextField(self, portIntField, "port"),
-                let width = app.getIntTextField(self, widthIntField, "width"),
-                let height = app.getIntTextField(self, heightIntField, "height"),
-                let fps = app.getIntTextField(self, fpsIntField, "fps"),
-                let bps = app.getIntTextField(self, bpsIntField, "bps")
+            guard let port = Utils.getIntTextField(self, portIntField, "port"),
+                let width = Utils.getIntTextField(self, widthIntField, "width"),
+                let height = Utils.getIntTextField(self, heightIntField, "height"),
+                let fps = Utils.getIntTextField(self, fpsIntField, "fps"),
+                let bps = Utils.getIntTextField(self, bpsIntField, "bps")
             else
             {
                 return false

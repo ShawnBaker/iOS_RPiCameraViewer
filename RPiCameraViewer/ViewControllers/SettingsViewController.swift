@@ -59,15 +59,15 @@ class SettingsViewController: InputViewController
 		// error check the input values
 		guard let name = cameraNameTextField.text, name.length > 0 else
 		{
-			app.error(self, "errorNoName")
+			Utils.error(self, "errorNoName")
 			return false
 		}
-		guard let timeout = app.getIntTextField(self, timeoutIntField, "scan timeout"),
-			let port = app.getIntTextField(self, portIntField, "port"),
-			let width = app.getIntTextField(self, widthIntField, "width"),
-			let height = app.getIntTextField(self, heightIntField, "height"),
-			let fps = app.getIntTextField(self, fpsIntField, "fps"),
-			let bps = app.getIntTextField(self, bpsIntField, "bps")
+		guard let timeout = Utils.getIntTextField(self, timeoutIntField, "scan timeout"),
+			let port = Utils.getIntTextField(self, portIntField, "port"),
+			let width = Utils.getIntTextField(self, widthIntField, "width"),
+			let height = Utils.getIntTextField(self, heightIntField, "height"),
+			let fps = Utils.getIntTextField(self, fpsIntField, "fps"),
+			let bps = Utils.getIntTextField(self, bpsIntField, "bps")
 			else
 		{
 			return false
