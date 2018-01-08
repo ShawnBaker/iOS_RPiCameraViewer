@@ -60,7 +60,7 @@ class ScanningViewController: UIViewController
 							let socket = openSocket(address, Int32(self.app.settings.source.port), Int32(self.app.settings.scanTimeout))
 							if (socket >= 0)
 							{
-								self.addCamera(address)
+								self.addCamera(address, port: Int(self.app.settings.source.port))
 								closeSocket(socket)
 							}
 						}
@@ -111,7 +111,7 @@ class ScanningViewController: UIViewController
 	//**********************************************************************
 	// addCamera
 	//**********************************************************************
-	func addCamera(_ address: String)
+	func addCamera(_ address: String, port: Int)
 	{
 		semaphore.wait()
 		var found = false
@@ -126,7 +126,7 @@ class ScanningViewController: UIViewController
 		if !found
 		{
 			//Log.info("addCamera: " + newCamera.source.toString())
-			let camera = Camera(self.network, "", Source(address: address))
+			let camera = Camera(self.network, "", Source(address: address, port: port))
 			self.newCameras.append(camera)
 		}
 		semaphore.signal()
