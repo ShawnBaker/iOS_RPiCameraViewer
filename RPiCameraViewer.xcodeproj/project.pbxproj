@@ -13,7 +13,6 @@
 		29FAE7AA1FB38CBB00747217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29FAE7A91FB38CBB00747217 /* Assets.xcassets */; };
 		29FAE7BA1FB38EA400747217 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7B51FB38EA300747217 /* StringExt.swift */; };
 		29FAE7BB1FB38EA400747217 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7B61FB38EA300747217 /* Settings.swift */; };
-		29FAE7BC1FB38EA400747217 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7B71FB38EA300747217 /* Source.swift */; };
 		29FAE7BD1FB38EA400747217 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7B81FB38EA300747217 /* Camera.swift */; };
 		29FAE7BE1FB38EA400747217 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7B91FB38EA300747217 /* Utils.swift */; };
 		29FAE7CB1FB38F1800747217 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FAE7C21FB38F1600747217 /* VideoViewController.swift */; };
@@ -44,7 +43,6 @@
 		29FAE7AE1FB38CBB00747217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29FAE7B51FB38EA300747217 /* StringExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		29FAE7B61FB38EA300747217 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		29FAE7B71FB38EA300747217 /* Source.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		29FAE7B81FB38EA300747217 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		29FAE7B91FB38EA300747217 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		29FAE7C21FB38F1600747217 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 			children = (
 				29FAE7B81FB38EA300747217 /* Camera.swift */,
 				29FAE7B61FB38EA300747217 /* Settings.swift */,
-				29FAE7B71FB38EA300747217 /* Source.swift */,
 				29FAE7B51FB38EA300747217 /* StringExt.swift */,
 				29FAE7B91FB38EA300747217 /* Utils.swift */,
 				29A295FD1FBA5F76004A7F77 /* NetworkInterface.swift */,
@@ -269,7 +266,6 @@
 				29E792911FB4FBEA0083CA75 /* ZoomPan.swift in Sources */,
 				29FAE7BE1FB38EA400747217 /* Utils.swift in Sources */,
 				29FAE7BB1FB38EA400747217 /* Settings.swift in Sources */,
-				29FAE7BC1FB38EA400747217 /* Source.swift in Sources */,
 				29FAE7A31FB38CBB00747217 /* AppDelegate.swift in Sources */,
 				29FAE7CC1FB38F1800747217 /* SettingsViewController.swift in Sources */,
 				29FAE7D11FB38F1800747217 /* CamerasViewController.swift in Sources */,
