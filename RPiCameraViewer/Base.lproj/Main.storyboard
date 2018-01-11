@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QnD-hK-fff">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QnD-hK-fff">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -110,20 +110,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdU-M5-YG7">
                                 <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Width" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4X6-um-Mab">
-                                        <rect key="frame" x="20" y="168" width="77" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQO-VA-9tZ">
                                         <rect key="frame" x="20" y="130" width="71" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Height" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05V-Om-nG0">
-                                        <rect key="frame" x="20" y="206" width="71" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -136,35 +124,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEQ-hB-zjV">
                                         <rect key="frame" x="20" y="92" width="71" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Frames per second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ccg-5J-P4z">
-                                        <rect key="frame" x="20" y="244" width="169" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wvQ-ad-h3S" customClass="IntTextField" customModule="RPiCameraViewer" customModuleProvider="target">
-                                        <rect key="frame" x="203" y="241" width="97" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLen">
-                                                <integer key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="min">
-                                                <integer key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="max">
-                                                <integer key="value" value="90"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bits per second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI7-Vt-YTf">
-                                        <rect key="frame" x="20" y="282" width="169" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -184,65 +143,20 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ei-Dm-JRs" customClass="IntTextField" customModule="RPiCameraViewer" customModuleProvider="target">
-                                        <rect key="frame" x="203" y="163" width="97" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="min">
-                                                <integer key="value" value="640"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="max">
-                                                <integer key="value" value="2592"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLen">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HlT-gq-Fpv">
                                         <rect key="frame" x="99" y="20" width="209" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yhi-0M-qlL" customClass="IntTextField" customModule="RPiCameraViewer" customModuleProvider="target">
-                                        <rect key="frame" x="203" y="202" width="97" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rcq-ZN-O2E">
+                                        <rect key="frame" x="99" y="49" width="200" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="min">
-                                                <integer key="value" value="480"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="max">
-                                                <integer key="value" value="1944"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLen">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SH2-DQ-xpo" customClass="IntTextField" customModule="RPiCameraViewer" customModuleProvider="target">
-                                        <rect key="frame" x="203" y="278" width="97" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLen">
-                                                <integer key="value" value="7"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="min">
-                                                <integer key="value" value="400000"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="max">
-                                                <integer key="value" value="10000000"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9tK-Ju-RJS" customClass="IntTextField" customModule="RPiCameraViewer" customModuleProvider="target">
-                                        <rect key="frame" x="200" y="125" width="100" height="30"/>
+                                        <rect key="frame" x="100" y="125" width="100" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="xoP-n0-PPz"/>
                                         </constraints>
@@ -261,51 +175,25 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rcq-ZN-O2E">
-                                        <rect key="frame" x="99" y="49" width="200" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
-                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="rcq-ZN-O2E" firstAttribute="width" secondItem="YCz-67-oKF" secondAttribute="width" id="1mv-Fz-jyB"/>
-                                    <constraint firstItem="KI7-Vt-YTf" firstAttribute="leading" secondItem="bdU-M5-YG7" secondAttribute="leading" constant="16" id="3QA-CW-Hcr"/>
-                                    <constraint firstItem="Yhi-0M-qlL" firstAttribute="width" secondItem="9tK-Ju-RJS" secondAttribute="width" id="43u-AI-Qfb"/>
                                     <constraint firstItem="JEQ-hB-zjV" firstAttribute="baseline" secondItem="YCz-67-oKF" secondAttribute="baseline" id="4kD-Kd-hWe"/>
                                     <constraint firstItem="YCz-67-oKF" firstAttribute="leading" secondItem="JEQ-hB-zjV" secondAttribute="trailing" constant="20" id="7dQ-Ec-Dfg"/>
                                     <constraint firstItem="9tK-Ju-RJS" firstAttribute="top" secondItem="YCz-67-oKF" secondAttribute="bottom" constant="8" id="89e-fP-cbg"/>
-                                    <constraint firstItem="7ei-Dm-JRs" firstAttribute="top" secondItem="9tK-Ju-RJS" secondAttribute="bottom" constant="8" id="A0T-6u-2s4"/>
-                                    <constraint firstItem="wvQ-ad-h3S" firstAttribute="width" secondItem="9tK-Ju-RJS" secondAttribute="width" id="BH1-h0-mhP"/>
-                                    <constraint firstItem="wvQ-ad-h3S" firstAttribute="trailing" secondItem="YCz-67-oKF" secondAttribute="trailing" id="BXU-rd-Jqj"/>
-                                    <constraint firstItem="rcq-ZN-O2E" firstAttribute="top" secondItem="HlT-gq-Fpv" secondAttribute="bottom" constant="8" id="BZh-eD-EGh"/>
-                                    <constraint firstItem="Yhi-0M-qlL" firstAttribute="top" secondItem="7ei-Dm-JRs" secondAttribute="bottom" constant="8" id="CPz-aX-MNd"/>
-                                    <constraint firstItem="05V-Om-nG0" firstAttribute="baseline" secondItem="Yhi-0M-qlL" secondAttribute="baseline" id="Dyj-69-pDF"/>
+                                    <constraint firstItem="rcq-ZN-O2E" firstAttribute="top" secondItem="HlT-gq-Fpv" secondAttribute="bottom" constant="12" id="BZh-eD-EGh"/>
+                                    <constraint firstItem="9tK-Ju-RJS" firstAttribute="leading" secondItem="YCz-67-oKF" secondAttribute="leading" id="Cwe-iK-Ie0"/>
                                     <constraint firstItem="HlT-gq-Fpv" firstAttribute="leading" secondItem="rcq-ZN-O2E" secondAttribute="leading" constant="4" id="EOO-3p-rV6"/>
-                                    <constraint firstItem="SH2-DQ-xpo" firstAttribute="width" secondItem="9tK-Ju-RJS" secondAttribute="width" id="HqK-Gg-y2V"/>
                                     <constraint firstItem="rcq-ZN-O2E" firstAttribute="trailing" secondItem="YCz-67-oKF" secondAttribute="trailing" id="Jwd-Ny-dbI"/>
                                     <constraint firstItem="YCz-67-oKF" firstAttribute="top" secondItem="rcq-ZN-O2E" secondAttribute="bottom" constant="8" id="K6t-Yt-0Wy"/>
-                                    <constraint firstItem="05V-Om-nG0" firstAttribute="leading" secondItem="bdU-M5-YG7" secondAttribute="leading" constant="16" id="MD5-Z3-hMz"/>
                                     <constraint firstItem="HlT-gq-Fpv" firstAttribute="top" secondItem="bdU-M5-YG7" secondAttribute="top" constant="16" id="MGC-Gl-ZpI"/>
-                                    <constraint firstItem="SH2-DQ-xpo" firstAttribute="trailing" secondItem="YCz-67-oKF" secondAttribute="trailing" id="O8g-aT-dv8"/>
-                                    <constraint firstItem="4X6-um-Mab" firstAttribute="leading" secondItem="bdU-M5-YG7" secondAttribute="leading" constant="16" id="WQJ-An-wu3"/>
                                     <constraint firstItem="YhM-O0-Jna" firstAttribute="leading" secondItem="bdU-M5-YG7" secondAttribute="leading" constant="16" id="Wgl-ut-OLT"/>
-                                    <constraint firstItem="7ei-Dm-JRs" firstAttribute="width" secondItem="9tK-Ju-RJS" secondAttribute="width" id="XFF-Ku-3Ql"/>
-                                    <constraint firstItem="7ei-Dm-JRs" firstAttribute="trailing" secondItem="YCz-67-oKF" secondAttribute="trailing" id="Xa5-uD-Ui0"/>
                                     <constraint firstItem="CVH-WL-J4n" firstAttribute="leading" secondItem="bdU-M5-YG7" secondAttribute="leading" constant="16" id="XfE-k3-uta"/>
-                                    <constraint firstItem="9tK-Ju-RJS" firstAttribute="trailing" secondItem="YCz-67-oKF" secondAttribute="trailing" id="YAd-vy-LQj"/>
-                                    <constraint firstItem="KI7-Vt-YTf" firstAttribute="baseline" secondItem="SH2-DQ-xpo" secondAttribute="baseline" id="crZ-Xk-G9M"/>
-                                    <constraint firstItem="SH2-DQ-xpo" firstAttribute="top" secondItem="wvQ-ad-h3S" secondAttribute="bottom" constant="8" id="hOH-zz-nQo"/>
-                                    <constraint firstItem="Ccg-5J-P4z" firstAttribute="baseline" secondItem="wvQ-ad-h3S" secondAttribute="baseline" id="hRP-8M-4TQ"/>
                                     <constraint firstItem="CVH-WL-J4n" firstAttribute="baseline" secondItem="rcq-ZN-O2E" secondAttribute="baseline" id="hUv-RV-h8D"/>
-                                    <constraint firstItem="Yhi-0M-qlL" firstAttribute="trailing" secondItem="YCz-67-oKF" secondAttribute="trailing" id="ilH-mR-WsB"/>
-                                    <constraint firstItem="4X6-um-Mab" firstAttribute="baseline" secondItem="7ei-Dm-JRs" secondAttribute="baseline" id="j8Q-Or-Ehp"/>
                                     <constraint firstItem="lQO-VA-9tZ" firstAttribute="leading" secondItem="bdU-M5-YG7" secondAttribute="leading" constant="16" id="jUB-kI-eAA"/>
-                                    <constraint firstItem="Ccg-5J-P4z" firstAttribute="leading" secondItem="bdU-M5-YG7" secondAttribute="leading" constant="16" id="k7a-qJ-H99"/>
                                     <constraint firstItem="YhM-O0-Jna" firstAttribute="top" secondItem="bdU-M5-YG7" secondAttribute="top" constant="16" id="mBY-fO-dQ8"/>
                                     <constraint firstItem="lQO-VA-9tZ" firstAttribute="baseline" secondItem="9tK-Ju-RJS" secondAttribute="baseline" id="sg4-zx-kor"/>
-                                    <constraint firstItem="wvQ-ad-h3S" firstAttribute="top" secondItem="Yhi-0M-qlL" secondAttribute="bottom" constant="8" id="uAy-Nf-wKf"/>
                                     <constraint firstItem="JEQ-hB-zjV" firstAttribute="leading" secondItem="bdU-M5-YG7" secondAttribute="leading" constant="16" id="vuV-Df-40H"/>
                                 </constraints>
                             </scrollView>
@@ -332,15 +220,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addressTextField" destination="YCz-67-oKF" id="qBb-aC-FqU"/>
-                        <outlet property="bpsIntField" destination="SH2-DQ-xpo" id="odj-bt-4nm"/>
-                        <outlet property="fpsIntField" destination="wvQ-ad-h3S" id="QnZ-F6-4Yq"/>
-                        <outlet property="heightIntField" destination="Yhi-0M-qlL" id="IZB-Tc-KQj"/>
                         <outlet property="mainScrollView" destination="bdU-M5-YG7" id="8IC-rW-dnm"/>
                         <outlet property="mainScrollViewBottomConstraint" destination="15T-LV-dwN" id="Vgj-68-MFy"/>
                         <outlet property="nameTextField" destination="rcq-ZN-O2E" id="dwd-y7-HV1"/>
                         <outlet property="networkLabel" destination="HlT-gq-Fpv" id="qCc-p5-6j7"/>
                         <outlet property="portIntField" destination="9tK-Ju-RJS" id="w5r-Yw-wQI"/>
-                        <outlet property="widthIntField" destination="7ei-Dm-JRs" id="dh7-MX-b8e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Zd-rG-If2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -678,14 +562,14 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mda-Yh-L7F">
                                 <rect key="frame" x="0.0" y="44" width="320" height="387"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Camera Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5A-Jw-kQ3">
-                                        <rect key="frame" x="15" y="13" width="135" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5A-Jw-kQ3">
+                                        <rect key="frame" x="24" y="27" width="109" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="obk-s9-3vi">
-                                        <rect key="frame" x="150" y="8" width="150" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="obk-s9-3vi">
+                                        <rect key="frame" x="153" y="24" width="140" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="140" id="6zX-lO-nq6"/>
                                         </constraints>
@@ -693,135 +577,20 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Show all networks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Kr-hQ-T6E">
-                                        <rect key="frame" x="15" y="46" width="169" height="31"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hOP-z3-Y8C">
-                                        <rect key="frame" x="192" y="46" width="51" height="31"/>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hOP-z3-Y8C">
+                                        <rect key="frame" x="184" y="138" width="51" height="31"/>
                                     </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MxK-Vn-H8p">
-                                        <rect key="frame" x="16" y="129" width="71" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MxK-Vn-H8p">
+                                        <rect key="frame" x="24" y="103" width="32.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bix-qq-HQJ" customClass="IntTextField" customModule="RPiCameraViewer" customModuleProvider="target">
-                                        <rect key="frame" x="191" y="124" width="113" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLen">
-                                                <integer key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="max">
-                                                <integer key="value" value="65535"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="min">
-                                                <integer key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Width" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HwL-mn-f4E">
-                                        <rect key="frame" x="16" y="167" width="77" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Height" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4G-nf-maq">
-                                        <rect key="frame" x="16" y="205" width="71" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Frames per second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rwr-cS-EAa">
-                                        <rect key="frame" x="16" y="243" width="170" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N93-BE-08U" customClass="IntTextField" customModule="RPiCameraViewer" customModuleProvider="target">
-                                        <rect key="frame" x="191" y="162" width="113" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="min">
-                                                <integer key="value" value="640"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="max">
-                                                <integer key="value" value="2592"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLen">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xgJ-ey-rho" customClass="IntTextField" customModule="RPiCameraViewer" customModuleProvider="target">
-                                        <rect key="frame" x="191" y="200" width="113" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="min">
-                                                <integer key="value" value="480"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="max">
-                                                <integer key="value" value="1944"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLen">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hxu-Xx-Jvw" customClass="IntTextField" customModule="RPiCameraViewer" customModuleProvider="target">
-                                        <rect key="frame" x="191" y="238" width="113" height="30"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xlI-K1-JDU" userLabel="Timeout Int Field" customClass="IntTextField" customModule="RPiCameraViewer" customModuleProvider="target">
+                                        <rect key="frame" x="153" y="62" width="80" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="9wD-2v-vyI"/>
+                                            <constraint firstAttribute="width" constant="80" id="CEr-9J-PwA"/>
                                         </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLen">
-                                                <integer key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="min">
-                                                <integer key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="max">
-                                                <integer key="value" value="90"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bits per second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyz-KO-O01">
-                                        <rect key="frame" x="16" y="281" width="169" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rjH-UZ-cTv" customClass="IntTextField" customModule="RPiCameraViewer" customModuleProvider="target">
-                                        <rect key="frame" x="191" y="276" width="113" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLen">
-                                                <integer key="value" value="7"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="min">
-                                                <integer key="value" value="400000"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="max">
-                                                <integer key="value" value="10000000"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xlI-K1-JDU" userLabel="Timeout Int Field" customClass="IntTextField" customModule="RPiCameraViewer" customModuleProvider="target">
-                                        <rect key="frame" x="192" y="85" width="112" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
@@ -837,8 +606,31 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Scan Timeout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ijx-d3-ZNj">
-                                        <rect key="frame" x="16" y="90" width="105.5" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Scan Timeout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ijx-d3-ZNj">
+                                        <rect key="frame" x="24" y="65" width="105.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bix-qq-HQJ" customClass="IntTextField" customModule="RPiCameraViewer" customModuleProvider="target">
+                                        <rect key="frame" x="153" y="100" width="80" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLen">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="max">
+                                                <integer key="value" value="65535"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="min">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Show all networks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Kr-hQ-T6E">
+                                        <rect key="frame" x="24" y="143" width="138" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -847,42 +639,22 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Ijx-d3-ZNj" firstAttribute="baseline" secondItem="xlI-K1-JDU" secondAttribute="baseline" id="4bZ-HM-KfP"/>
-                                    <constraint firstItem="rjH-UZ-cTv" firstAttribute="trailing" secondItem="Hxu-Xx-Jvw" secondAttribute="trailing" id="4wp-OF-iOM"/>
-                                    <constraint firstItem="xlI-K1-JDU" firstAttribute="trailing" secondItem="Hxu-Xx-Jvw" secondAttribute="trailing" id="81L-Un-3ct"/>
-                                    <constraint firstItem="f4G-nf-maq" firstAttribute="baseline" secondItem="xgJ-ey-rho" secondAttribute="baseline" id="92Q-Zy-hy5"/>
-                                    <constraint firstItem="Hxu-Xx-Jvw" firstAttribute="leading" secondItem="Rwr-cS-EAa" secondAttribute="trailing" constant="20" id="9QL-xa-rcJ"/>
-                                    <constraint firstItem="f4G-nf-maq" firstAttribute="leading" secondItem="Mda-Yh-L7F" secondAttribute="leadingMargin" constant="16" id="BsG-p5-yqS"/>
                                     <constraint firstItem="obk-s9-3vi" firstAttribute="top" secondItem="Mda-Yh-L7F" secondAttribute="topMargin" constant="16" id="C7q-Rn-8Ni"/>
                                     <constraint firstItem="MxK-Vn-H8p" firstAttribute="baseline" secondItem="Bix-qq-HQJ" secondAttribute="baseline" id="CRK-Yp-ceG"/>
                                     <constraint firstItem="MxK-Vn-H8p" firstAttribute="leading" secondItem="Mda-Yh-L7F" secondAttribute="leadingMargin" constant="16" id="Cke-eN-Ch3"/>
-                                    <constraint firstItem="N93-BE-08U" firstAttribute="top" secondItem="Bix-qq-HQJ" secondAttribute="bottom" constant="8" id="EZ2-Tb-R2R"/>
-                                    <constraint firstItem="Rwr-cS-EAa" firstAttribute="leading" secondItem="Mda-Yh-L7F" secondAttribute="leadingMargin" constant="16" id="FH6-X3-awO"/>
                                     <constraint firstItem="6Kr-hQ-T6E" firstAttribute="centerY" secondItem="hOP-z3-Y8C" secondAttribute="centerY" id="JZQ-D5-JRz"/>
-                                    <constraint firstItem="xlI-K1-JDU" firstAttribute="top" secondItem="hOP-z3-Y8C" secondAttribute="bottom" constant="8" id="LLM-Ir-8qu"/>
-                                    <constraint firstItem="HwL-mn-f4E" firstAttribute="leading" secondItem="Mda-Yh-L7F" secondAttribute="leadingMargin" constant="16" id="LmR-hO-XmS"/>
-                                    <constraint firstItem="Rwr-cS-EAa" firstAttribute="baseline" secondItem="Hxu-Xx-Jvw" secondAttribute="baseline" id="XQP-IB-TFZ"/>
-                                    <constraint firstItem="N93-BE-08U" firstAttribute="trailing" secondItem="Hxu-Xx-Jvw" secondAttribute="trailing" id="YAa-6N-f7L"/>
-                                    <constraint firstItem="iyz-KO-O01" firstAttribute="baseline" secondItem="rjH-UZ-cTv" secondAttribute="baseline" id="YMH-rD-vA1"/>
-                                    <constraint firstItem="iyz-KO-O01" firstAttribute="leading" secondItem="Mda-Yh-L7F" secondAttribute="leadingMargin" constant="16" id="YYW-nQ-k65"/>
-                                    <constraint firstItem="Hxu-Xx-Jvw" firstAttribute="top" secondItem="xgJ-ey-rho" secondAttribute="bottom" constant="8" id="dw4-Va-1Qg"/>
+                                    <constraint firstItem="Bix-qq-HQJ" firstAttribute="leading" secondItem="obk-s9-3vi" secondAttribute="leading" id="O1X-1w-1wu"/>
+                                    <constraint firstItem="hOP-z3-Y8C" firstAttribute="top" secondItem="Bix-qq-HQJ" secondAttribute="bottom" constant="8" id="OQx-sK-vtg"/>
+                                    <constraint firstItem="hOP-z3-Y8C" firstAttribute="leading" secondItem="6Kr-hQ-T6E" secondAttribute="trailing" constant="20" id="SYE-Pf-Oi4"/>
+                                    <constraint firstItem="xlI-K1-JDU" firstAttribute="top" secondItem="obk-s9-3vi" secondAttribute="bottom" constant="8" id="YOX-ke-R27"/>
+                                    <constraint firstItem="Bix-qq-HQJ" firstAttribute="width" secondItem="xlI-K1-JDU" secondAttribute="width" id="ZcX-I3-gNO"/>
                                     <constraint firstItem="u5A-Jw-kQ3" firstAttribute="leading" secondItem="Mda-Yh-L7F" secondAttribute="leadingMargin" constant="16" id="fZ3-Bp-2dO"/>
-                                    <constraint firstItem="xgJ-ey-rho" firstAttribute="width" secondItem="Hxu-Xx-Jvw" secondAttribute="width" id="gzy-Sr-yRD"/>
                                     <constraint firstItem="Ijx-d3-ZNj" firstAttribute="leading" secondItem="Mda-Yh-L7F" secondAttribute="leadingMargin" constant="16" id="h5G-Zg-psS"/>
-                                    <constraint firstItem="xlI-K1-JDU" firstAttribute="width" secondItem="Hxu-Xx-Jvw" secondAttribute="width" id="hFL-sx-NDf"/>
                                     <constraint firstItem="Bix-qq-HQJ" firstAttribute="top" secondItem="xlI-K1-JDU" secondAttribute="bottom" constant="8" id="hNn-nn-Mqk"/>
-                                    <constraint firstItem="N93-BE-08U" firstAttribute="width" secondItem="Hxu-Xx-Jvw" secondAttribute="width" id="kS3-de-WM5"/>
                                     <constraint firstItem="6Kr-hQ-T6E" firstAttribute="leading" secondItem="Mda-Yh-L7F" secondAttribute="leadingMargin" constant="16" id="lJU-nR-4bd"/>
-                                    <constraint firstItem="rjH-UZ-cTv" firstAttribute="width" secondItem="Hxu-Xx-Jvw" secondAttribute="width" id="m6L-m8-JSa"/>
-                                    <constraint firstItem="rjH-UZ-cTv" firstAttribute="top" secondItem="Hxu-Xx-Jvw" secondAttribute="bottom" constant="8" id="maA-P4-lRe"/>
-                                    <constraint firstItem="xgJ-ey-rho" firstAttribute="trailing" secondItem="Hxu-Xx-Jvw" secondAttribute="trailing" id="mx4-7H-vEX"/>
-                                    <constraint firstItem="hOP-z3-Y8C" firstAttribute="top" secondItem="obk-s9-3vi" secondAttribute="bottom" constant="8" id="ohP-qE-vGb"/>
+                                    <constraint firstItem="xlI-K1-JDU" firstAttribute="leading" secondItem="obk-s9-3vi" secondAttribute="leading" id="mPX-Yc-gB0"/>
                                     <constraint firstItem="u5A-Jw-kQ3" firstAttribute="baseline" secondItem="obk-s9-3vi" secondAttribute="baseline" id="pEX-gw-HsA"/>
-                                    <constraint firstItem="HwL-mn-f4E" firstAttribute="baseline" secondItem="N93-BE-08U" secondAttribute="baseline" id="puw-kU-hhf"/>
-                                    <constraint firstItem="Bix-qq-HQJ" firstAttribute="trailing" secondItem="Hxu-Xx-Jvw" secondAttribute="trailing" id="qnB-Zl-qDJ"/>
-                                    <constraint firstItem="obk-s9-3vi" firstAttribute="trailing" secondItem="Hxu-Xx-Jvw" secondAttribute="trailing" id="rem-YQ-wqn"/>
-                                    <constraint firstItem="Bix-qq-HQJ" firstAttribute="width" secondItem="Hxu-Xx-Jvw" secondAttribute="width" id="yXx-N9-O2G"/>
-                                    <constraint firstItem="xgJ-ey-rho" firstAttribute="top" secondItem="N93-BE-08U" secondAttribute="bottom" constant="8" id="yiK-RZ-skL"/>
-                                    <constraint firstItem="hOP-z3-Y8C" firstAttribute="leading" secondItem="Bix-qq-HQJ" secondAttribute="leading" id="zqa-8i-8RB"/>
+                                    <constraint firstItem="obk-s9-3vi" firstAttribute="leading" secondItem="u5A-Jw-kQ3" secondAttribute="trailing" constant="20" id="wC4-jh-qpc"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -900,16 +672,12 @@
                     <tabBarItem key="tabBarItem" title="Settings" image="TabSettings" id="tzF-RV-9b8"/>
                     <connections>
                         <outlet property="allNetworksSwitch" destination="hOP-z3-Y8C" id="nch-ob-X09"/>
-                        <outlet property="bpsIntField" destination="rjH-UZ-cTv" id="ys8-GV-QgD"/>
                         <outlet property="cameraNameTextField" destination="obk-s9-3vi" id="EXz-dW-eDo"/>
-                        <outlet property="fpsIntField" destination="Hxu-Xx-Jvw" id="dhf-DP-qLe"/>
-                        <outlet property="heightIntField" destination="xgJ-ey-rho" id="SUc-xz-jS5"/>
                         <outlet property="mainScrollView" destination="Mda-Yh-L7F" id="8Cy-cy-Uda"/>
                         <outlet property="mainScrollViewBottomConstraint" destination="hjE-uc-vT3" id="mVl-Bj-HuI"/>
                         <outlet property="navigationBar" destination="1pc-Wh-sA1" id="Up8-wy-SZf"/>
                         <outlet property="portIntField" destination="Bix-qq-HQJ" id="n8o-CH-fZX"/>
                         <outlet property="timeoutIntField" destination="xlI-K1-JDU" id="ZjT-GW-2vd"/>
-                        <outlet property="widthIntField" destination="N93-BE-08U" id="4Iw-dX-utf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CId-YV-JwG" userLabel="First Responder" sceneMemberID="firstResponder"/>
