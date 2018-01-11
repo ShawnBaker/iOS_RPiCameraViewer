@@ -1,4 +1,4 @@
-// Copyright © 2016-2017 Shawn Baker using the MIT License.
+// Copyright © 2016-2018 Shawn Baker using the MIT License.
 import UIKit
 
 class CamerasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
@@ -139,8 +139,8 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 		{
 			if segue.identifier == "CreateCamera"
 			{
-				let source = Source(address: Utils.getBaseIPAddress(Utils.getIPAddress()))
-				vc.camera = Camera(Utils.getNetworkName(), Utils.getNextCameraName(app.cameras), source)
+				vc.camera = Camera(Utils.getNextCameraName(app.cameras), Utils.getNetworkName(),
+								   Utils.getBaseIPAddress(Utils.getIPAddress()), app.settings.port)
 				self.camera = vc.camera
 			}
 			else if segue.identifier == "EditCamera", let camera = sender as? Camera
@@ -176,7 +176,7 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 		let cell = tableView.dequeueReusableCell(withIdentifier: cameraCellId, for: indexPath)
 		let camera = cameras[indexPath.row]
 		cell.textLabel?.text = camera.name
-		var details = camera.source.address + ":" + String(camera.source.port)
+		var details = camera.address + ":" + String(camera.port)
 		if app.settings.showAllCameras
 		{
 			details = camera.network + ": " + details
