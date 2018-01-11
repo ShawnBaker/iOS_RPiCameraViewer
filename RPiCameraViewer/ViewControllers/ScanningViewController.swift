@@ -1,4 +1,4 @@
-// Copyright © 2017 Shawn Baker using the MIT License.
+// Copyright © 2017-2018 Shawn Baker using the MIT License.
 import UIKit
 
 class ScanningViewController: UIViewController
@@ -44,7 +44,7 @@ class ScanningViewController: UIViewController
 		}
 		else
 		{
-			messageLabel.text = String(format: "scanningOnPort".local, app.settings.source.port)
+			messageLabel.text = String(format: "scanningOnPort".local, app.settings.port)
 			statusLabel.text = String(format: "newCamerasFound".local, 0)
 			let baseAddress = Utils.getBaseIPAddress(wireless.address)
 			for _ in 1...NUM_THREADS
@@ -57,7 +57,7 @@ class ScanningViewController: UIViewController
 						let address = baseAddress + String(dev)
 						if address != self.wireless.address
 						{
-							let socket = openSocket(address, Int32(self.app.settings.source.port), Int32(self.app.settings.scanTimeout))
+							let socket = openSocket(address, Int32(self.app.settings.port), Int32(self.app.settings.scanTimeout))
 							if (socket >= 0)
 							{
 								self.addCamera(address)
@@ -117,7 +117,7 @@ class ScanningViewController: UIViewController
 		var found = false
 		for camera in self.app.cameras
 		{
-			if camera.network == self.network && camera.source.address == address && camera.source.port == self.app.settings.source.port
+			if camera.network == self.network && camera.address == address && camera.port == self.app.settings.port
 			{
 				found = true
 				break
@@ -126,7 +126,7 @@ class ScanningViewController: UIViewController
 		if !found
 		{
 			//Log.info("addCamera: " + newCamera.source.toString())
-			let camera = Camera(self.network, "", Source(address: address))
+			let camera = Camera("", self.network, address, app.settings.port)
 			self.newCameras.append(camera)
 		}
 		semaphore.signal()
@@ -165,8 +165,8 @@ class ScanningViewController: UIViewController
 	//**********************************************************************
 	func compareCameras(cam1: Camera, cam2: Camera) -> Bool
 	{
-		let octets1 = cam1.source.address.split(separator: ".")
-		let octets2 = cam2.source.address.split(separator: ".")
+		let octets1 = cam1.address.split(separator: ".")
+		let octets2 = cam2.address.split(separator: ".")
 		let last1 = Int(octets1[3])
 		let last2 = Int(octets2[3])
 		return last1! < last2!
