@@ -1,4 +1,4 @@
-// Copyright © 2016-2017 Shawn Baker using the MIT License.
+// Copyright © 2016-2018 Shawn Baker using the MIT License.
 import UIKit
 
 @UIApplicationMain
@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     {
 		// get the settings
         let userDefults = UserDefaults.standard
-        if let data = userDefults.object(forKey: "settings") as? NSData
+        if let data = userDefults.object(forKey: "settings2") as? NSData
         {
             settings = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! Settings
         }
@@ -73,11 +73,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         else
         {
             let data = NSKeyedArchiver.archivedData(withRootObject: settings);
-            userDefults.set(data, forKey: "settings")
+            userDefults.set(data, forKey: "settings2")
         }
 		
 		// get the list of cameras
-        if let data = userDefults.object(forKey: "cameras") as? NSData
+        if let data = userDefults.object(forKey: "cameras2") as? NSData
         {
             cameras = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! [Camera]
         }
@@ -91,11 +91,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		// save the settings
         let userDefults = UserDefaults.standard
         var data = NSKeyedArchiver.archivedData(withRootObject: settings);
-        userDefults.set(data, forKey: "settings")
+        userDefults.set(data, forKey: "settings2")
 		
 		// save the list of cameras
         data = NSKeyedArchiver.archivedData(withRootObject: cameras);
-        userDefults.set(data, forKey: "cameras")
+        userDefults.set(data, forKey: "cameras2")
     }
 }
 
