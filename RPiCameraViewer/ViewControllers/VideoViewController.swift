@@ -1,4 +1,4 @@
-// Copyright © 2016-2017 Shawn Baker using the MIT License.
+// Copyright © 2016-2018 Shawn Baker using the MIT License.
 import UIKit
 import AVFoundation
 import VideoToolbox
@@ -297,7 +297,7 @@ class VideoViewController: UIViewController
 				{
 					self.stopVideo()
 				}
-				let socket = openSocket(self.camera!.source.address, Int32(self.app.settings.source.port), Int32(self.app.settings.scanTimeout))
+				let socket = openSocket(self.camera!.address, Int32(self.camera!.port), Int32(self.app.settings.scanTimeout))
 				if (socket >= 0)
 				{
 					var numZeroes = 0
