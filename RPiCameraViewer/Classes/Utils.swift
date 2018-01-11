@@ -1,4 +1,4 @@
-// Copyright © 2017 Shawn Baker using the MIT License.
+// Copyright © 2017-2018 Shawn Baker using the MIT License.
 import Foundation
 import SystemConfiguration.CaptiveNetwork
 import UIKit
@@ -196,7 +196,7 @@ class Utils
 		// make sure there's a value
 		guard let value = intField.value else
 		{
-			let message = String(format: "errorNoValue".local, name)
+			let message = String(format: "errorNoValue".local, name.local)
 			error(vc, message)
 			return nil
 		}
@@ -204,7 +204,7 @@ class Utils
 		// make sure it's in range
 		guard value >= intField.min && value <= intField.max else
 		{
-			let message = String(format: "errorValueOutOfRange".local, name, intField.min, intField.max)
+			let message = String(format: "errorValueOutOfRange".local, name.local, intField.min, intField.max)
 			error(vc, message)
 			return nil
 		}
