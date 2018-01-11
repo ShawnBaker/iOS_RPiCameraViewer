@@ -1,4 +1,4 @@
-// Copyright © 2016-2017 Shawn Baker using the MIT License.
+// Copyright © 2016-2018 Shawn Baker using the MIT License.
 errorBadAddress = "Invalid address.";
 errorNameAlreadyExists = "The camera name already exists.";
 errorNoAddress = "You must enter an address.";
@@ -37,6 +37,7 @@ ok = "OK";
 okToDeleteAllCameras = "Are you sure you want to delete all the cameras?";
 port = "port";
 scanningOnPort = "Scanning on port %d";
+scanTimeout = "scan timeout";
 version = "Version %@";
 versionBuild = "Version %@ (build %@)";
 videoStopped = "Video stopped.";
