@@ -1,4 +1,4 @@
-// Copyright © 2016-2017 Shawn Baker using the MIT License.
+// Copyright © 2016-2018 Shawn Baker using the MIT License.
 import UIKit
 
 class SettingsViewController: InputViewController
@@ -11,10 +11,6 @@ class SettingsViewController: InputViewController
 	@IBOutlet weak var allNetworksSwitch: UISwitch!
 	@IBOutlet weak var timeoutIntField: IntTextField!
 	@IBOutlet weak var portIntField: IntTextField!
-	@IBOutlet weak var widthIntField: IntTextField!
-	@IBOutlet weak var heightIntField: IntTextField!
-	@IBOutlet weak var fpsIntField: IntTextField!
-	@IBOutlet weak var bpsIntField: IntTextField!
 
 	//**********************************************************************
 	// viewDidLoad
@@ -32,11 +28,7 @@ class SettingsViewController: InputViewController
 		cameraNameTextField.text = app.settings.cameraName
 		allNetworksSwitch.isOn = app.settings.showAllCameras
 		timeoutIntField.value = app.settings.scanTimeout
-		portIntField.value = app.settings.source.port
-		widthIntField.value = app.settings.source.width
-		heightIntField.value = app.settings.source.height
-		fpsIntField.value = app.settings.source.fps
-		bpsIntField.value = app.settings.source.bps
+		portIntField.value = app.settings.port
 	}
 
 	//**********************************************************************
@@ -62,13 +54,9 @@ class SettingsViewController: InputViewController
 			Utils.error(self, "errorNoName")
 			return false
 		}
-		guard let timeout = Utils.getIntTextField(self, timeoutIntField, "scan timeout"),
-			let port = Utils.getIntTextField(self, portIntField, "port"),
-			let width = Utils.getIntTextField(self, widthIntField, "width"),
-			let height = Utils.getIntTextField(self, heightIntField, "height"),
-			let fps = Utils.getIntTextField(self, fpsIntField, "fps"),
-			let bps = Utils.getIntTextField(self, bpsIntField, "bps")
-			else
+		guard let timeout = Utils.getIntTextField(self, timeoutIntField, "scanTimeout"),
+			  let port = Utils.getIntTextField(self, portIntField, "port")
+		else
 		{
 			return false
 		}
@@ -77,11 +65,7 @@ class SettingsViewController: InputViewController
 		app.settings.cameraName = name
 		app.settings.showAllCameras = allNetworksSwitch.isOn
 		app.settings.scanTimeout = timeout
-		app.settings.source.port = port
-		app.settings.source.width = width
-		app.settings.source.height = height
-		app.settings.source.fps = fps
-		app.settings.source.bps = bps
+		app.settings.port = port
 		
 		// save the settings
 		app.save()

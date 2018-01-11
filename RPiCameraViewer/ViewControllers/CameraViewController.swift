@@ -1,4 +1,4 @@
-// Copyright © 2016-2017 Shawn Baker using the MIT License.
+// Copyright © 2016-2018 Shawn Baker using the MIT License.
 import UIKit
 
 class CameraViewController: InputViewController
@@ -10,10 +10,6 @@ class CameraViewController: InputViewController
 	@IBOutlet weak var nameTextField: UITextField!
 	@IBOutlet weak var addressTextField: UITextField!
 	@IBOutlet weak var portIntField: IntTextField!
-    @IBOutlet weak var widthIntField: IntTextField!
-    @IBOutlet weak var heightIntField: IntTextField!
-    @IBOutlet weak var fpsIntField: IntTextField!
-    @IBOutlet weak var bpsIntField: IntTextField!
 	
     // instance variables
     var camera = Camera()
@@ -29,12 +25,8 @@ class CameraViewController: InputViewController
 		
 		networkLabel.text = camera.network
 		nameTextField.text = camera.name
-		addressTextField.text = camera.source.address
-        portIntField.value = camera.source.port
-        widthIntField.value = camera.source.width
-        heightIntField.value = camera.source.height
-        fpsIntField.value = camera.source.fps
-        bpsIntField.value = camera.source.bps
+		addressTextField.text = camera.address
+        portIntField.value = camera.port
     }
 	
     //**********************************************************************
@@ -79,11 +71,7 @@ class CameraViewController: InputViewController
 				Utils.error(self, "errorBadAddress")
 				return false
 			}
-            guard let port = Utils.getIntTextField(self, portIntField, "port"),
-                let width = Utils.getIntTextField(self, widthIntField, "width"),
-                let height = Utils.getIntTextField(self, heightIntField, "height"),
-                let fps = Utils.getIntTextField(self, fpsIntField, "fps"),
-                let bps = Utils.getIntTextField(self, bpsIntField, "bps")
+            guard let port = Utils.getIntTextField(self, portIntField, "port")
             else
             {
                 return false
@@ -92,12 +80,8 @@ class CameraViewController: InputViewController
             // assign the new values to the camera
             camera.name = name
             //camera.network = networkLabel.text!
-            camera.source.address = address
-            camera.source.port = port
-            camera.source.width = width
-            camera.source.height = height
-            camera.source.fps = fps
-            camera.source.bps = bps
+            camera.address = address
+            camera.port = port
         }
         return true
     }
