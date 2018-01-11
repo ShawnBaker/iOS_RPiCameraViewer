@@ -1,14 +1,14 @@
-// Copyright © 2016-2017 Shawn Baker using the MIT License.
+// Copyright © 2016-2018 Shawn Baker using the MIT License.
 import Foundation
 
 class Camera: NSObject, NSCoding
 {
     // instance variables
+	var name = ""
     var network = ""
-    var name = ""
-    var source = Source()
-	//https://stackoverflow.com/questions/29525000/how-to-use-videotoolbox-to-decompress-h-264-video-stream/29525001#29525001
-    
+	var address = ""
+	var port = 5001
+	
     //**********************************************************************
     // init
     //**********************************************************************
@@ -19,19 +19,12 @@ class Camera: NSObject, NSCoding
     //**********************************************************************
     // init
     //**********************************************************************
-    init(_ network: String, _ name: String, _ source: Source)
+    init(_ name: String, _ network: String, _ address: String, _ port: Int)
     {
-        self.network = network
         self.name = name
-        self.source = source
-    }
-    
-    //**********************************************************************
-    // init
-    //**********************************************************************
-    convenience init(name: String)
-    {
-        self.init("frozen", name, Source("", 5001, 1280, 720, 15, 1000000))
+		self.network = network
+        self.address = address
+		self.port = port
     }
     
     //**********************************************************************
@@ -39,7 +32,7 @@ class Camera: NSObject, NSCoding
     //**********************************************************************
     convenience init(_ camera: Camera)
     {
-        self.init(camera.network, camera.name, Source(camera.source))
+        self.init(camera.name, camera.network, camera.address, camera.port)
     }
     
     //**********************************************************************
@@ -47,12 +40,10 @@ class Camera: NSObject, NSCoding
     //**********************************************************************
     required init(coder decoder: NSCoder)
     {
+		name = decoder.decodeObject(forKey: "name") as! String
         network = decoder.decodeObject(forKey: "network") as! String
-        name = decoder.decodeObject(forKey: "name") as! String
-        if let data =  decoder.decodeObject(forKey: "source") as? NSData
-        {
-            source = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! Source
-        }
+		address = decoder.decodeObject(forKey: "address") as! String
+		port = decoder.decodeInteger(forKey: "port")
     }
     
     //**********************************************************************
@@ -60,9 +51,9 @@ class Camera: NSObject, NSCoding
     //**********************************************************************
     func encode(with encoder: NSCoder)
     {
+		encoder.encode(name, forKey: "name")
         encoder.encode(network, forKey: "network")
-        encoder.encode(name, forKey: "name")
-        let data = NSKeyedArchiver.archivedData(withRootObject: source);
-        encoder.encode(data, forKey: "source")
+		encoder.encode(address, forKey: "address")
+		encoder.encode(port, forKey: "port")
     }
 }
