@@ -111,7 +111,7 @@ class Utils
 	class func isValidIPAddress(_ address: String) -> Bool
 	{
 		let parts = address.split(separator: ".")
-		let octets = parts.flatMap { Int($0) }
+		let octets = parts.compactMap { Int($0) }
 		return parts.count == 4 && octets.count == 4 && octets.filter { $0 >= 0 && $0 < 256}.count == 4
 	}
 	
