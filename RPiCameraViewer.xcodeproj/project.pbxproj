@@ -35,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		297ECB7721DC0C1A00DC8869 /* RPiCameraViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RPiCameraViewer.entitlements; sourceTree = "<group>"; };
 		29A295FD1FBA5F76004A7F77 /* NetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterface.swift; sourceTree = "<group>"; };
 		29E792901FB4FBEA0083CA75 /* ZoomPan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomPan.swift; sourceTree = "<group>"; };
 		29FAE79F1FB38CBB00747217 /* RPiCameraViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPiCameraViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +97,7 @@
 		29FAE7A11FB38CBB00747217 /* RPiCameraViewer */ = {
 			isa = PBXGroup;
 			children = (
+				297ECB7721DC0C1A00DC8869 /* RPiCameraViewer.entitlements */,
 				29FAE7B41FB38CD100747217 /* Classes */,
 				29FAE7BF1FB38ED400747217 /* Sockets */,
 				29FAE7C01FB38EDB00747217 /* Views */,
@@ -210,6 +212,11 @@
 						CreatedOnToolsVersion = 9.1;
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -418,6 +425,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = RPiCameraViewer/RPiCameraViewer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3985AHAG8A;
 				INFOPLIST_FILE = RPiCameraViewer/Info.plist;
@@ -436,6 +444,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = RPiCameraViewer/RPiCameraViewer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3985AHAG8A;
 				INFOPLIST_FILE = RPiCameraViewer/Info.plist;
