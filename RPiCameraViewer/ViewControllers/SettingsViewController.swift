@@ -1,4 +1,4 @@
-// Copyright © 2016-2018 Shawn Baker using the MIT License.
+// Copyright © 2016-2019 Shawn Baker using the MIT License.
 import UIKit
 
 class SettingsViewController: InputViewController
@@ -6,7 +6,6 @@ class SettingsViewController: InputViewController
 	// outlets
 	@IBOutlet weak var mainScrollViewBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var mainScrollView: UIScrollView!
-	@IBOutlet weak var navigationBar: UINavigationBar!
 	@IBOutlet weak var cameraNameTextField: UITextField!
 	@IBOutlet weak var allNetworksSwitch: UISwitch!
 	@IBOutlet weak var timeoutIntField: IntTextField!
@@ -18,10 +17,6 @@ class SettingsViewController: InputViewController
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
-		
-		let navigationItem = UINavigationItem()
-		navigationItem.title = "appName".local
-		navigationBar.items = [navigationItem]
 		
 		initScrollView(mainScrollView, mainScrollViewBottomConstraint)
 		

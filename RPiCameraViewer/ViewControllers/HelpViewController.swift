@@ -1,10 +1,9 @@
-// Copyright © 2016-2017 Shawn Baker using the MIT License.
+// Copyright © 2016-2019 Shawn Baker using the MIT License.
 import UIKit
 
 class HelpViewController: UIViewController
 {
     // outlets
-	@IBOutlet weak var navigationBar: UINavigationBar!
 	@IBOutlet weak var helpTextView: UITextView!
     
     //**********************************************************************
@@ -13,10 +12,6 @@ class HelpViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-		
-		let navigationItem = UINavigationItem()
-		navigationItem.title = "appName".local
-		navigationBar.items = [navigationItem]
 		
         helpTextView.attributedText = "helpText".local.htmlAttr
     }
