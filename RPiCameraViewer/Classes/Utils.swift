@@ -5,11 +5,15 @@ import UIKit
 
 class Utils
 {
-	// global colors
+	// public constants
 	static let badTextColor = UIColor.red
 	static let goodTextColor = UIColor.init(red: 0, green: CGFloat(192) / 255.0, blue: 0, alpha: 1)
 	static let primaryColor = UIColor.init(red: CGFloat(214) / 255.0, green: CGFloat(25) / 255.0, blue: CGFloat(25) / 255.0, alpha: 1)
-	
+	static let ipAddressRegexString = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+	static let hostnameRegexString = "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"
+	static let ipAddressRegex = try! NSRegularExpression(pattern: ipAddressRegexString)
+	static let hostnameRegex = try! NSRegularExpression(pattern: hostnameRegexString)
+
 	//**********************************************************************
 	// getNetworkName
 	//**********************************************************************
@@ -28,6 +32,15 @@ class Utils
 			}
 		}
 		return ssid
+	}
+
+	//**********************************************************************
+	// connectedToNetwork
+	//**********************************************************************
+	class func connectedToNetwork() -> Bool
+	{
+		let name = getNetworkName();
+		return !name.isEmpty;
 	}
 	
 	//**********************************************************************
@@ -106,28 +119,58 @@ class Utils
 	}
 
 	//**********************************************************************
-	// isValidIPAddress
+	// isIpAddress
 	//**********************************************************************
-	class func isValidIPAddress(_ address: String) -> Bool
+	class func isIpAddress(_ address: String) -> Bool
 	{
-		let parts = address.split(separator: ".")
-		let octets = parts.compactMap { Int($0) }
-		return parts.count == 4 && octets.count == 4 && octets.filter { $0 >= 0 && $0 < 256}.count == 4
+		let range = NSRange(location: 0, length: address.utf16.count)
+		return ipAddressRegex.firstMatch(in: address, options: [], range: range) != nil
+	}
+	
+	//**********************************************************************
+	// isHostname
+	//**********************************************************************
+	class func isHostname(_ address: String) -> Bool
+	{
+		let range = NSRange(location: 0, length: address.utf16.count)
+		return hostnameRegex.firstMatch(in: address, options: [], range: range) != nil
+	}
+	
+	//**********************************************************************
+	// resolveHostname
+	//**********************************************************************
+	class func resolveHostname(_ hostname: String) -> String
+	{
+		var address = ""
+		let host = CFHostCreateWithName(nil, hostname as CFString).takeRetainedValue()
+		CFHostStartInfoResolution(host, .addresses, nil)
+		var success: DarwinBoolean = false
+		if let addresses = CFHostGetAddressing(host, &success)?.takeUnretainedValue() as NSArray?,
+			let addr = addresses.firstObject as? NSData
+		{
+			var name = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+			if getnameinfo(addr.bytes.assumingMemoryBound(to: sockaddr.self), socklen_t(addr.length),
+						   &name, socklen_t(name.count), nil, 0, NI_NUMERICHOST) == 0
+			{
+				address = String(cString: name)
+			}
+		}
+		return address
 	}
 	
 	//**********************************************************************
 	// getNetworkCameras
 	//**********************************************************************
-	class func getNetworkCameras() -> [Camera]
+	class func getNetworkCameras(_ network: String, _ includeHostnames: Bool) -> [Camera]
 	{
 		var networkCameras = [Camera]()
-		let network = getNetworkName()
 		if !network.isEmpty
 		{
 			let app = UIApplication.shared.delegate as! AppDelegate
 			for camera in app.cameras
 			{
-				if camera.network == network
+				if (isIpAddress(camera.address) && camera.network == network) ||
+					(includeHostnames && isHostname(camera.address))
 				{
 					networkCameras.append(camera)
 				}

@@ -1,7 +1,9 @@
 // Copyright © 2016-2018 Shawn Baker using the MIT License.
 errorBadAddress = "Invalid address.";
+errorCouldntResolveHostname = "Couldn't resolve hostname\n%@";
 errorNameAlreadyExists = "The camera name already exists.";
 errorNoAddress = "You must enter an address.";
+errorNoCamera = "No camera object.";
 errorNoName = "You must enter a name.";
 errorNoNetwork = "There is no network to scan.";
 errorNotAuthorizedToSavePhotos = "This app is not authorized to save photos to the Photo Library.";

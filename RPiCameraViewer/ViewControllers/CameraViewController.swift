@@ -66,7 +66,7 @@ class CameraViewController: InputViewController
                 Utils.error(self, "errorNoAddress")
                 return false
             }
-			guard Utils.isValidIPAddress(address) else
+			guard Utils.isIpAddress(address) || Utils.isHostname(address) else
 			{
 				Utils.error(self, "errorBadAddress")
 				return false

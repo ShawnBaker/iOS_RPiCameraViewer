@@ -15,6 +15,7 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 	let app = UIApplication.shared.delegate as! AppDelegate
 	var camera = Camera()
 	var cameras = [Camera]()
+	var showNetwork = false
 
 	//**********************************************************************
 	// viewDidLoad
@@ -81,8 +82,19 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 	//**********************************************************************
 	func getCameras()
 	{
-		cameras = app.settings.showAllCameras ? app.cameras : Utils.getNetworkCameras()
+		var showAllCameras = !Utils.connectedToNetwork() || app.settings.showAllCameras
+		if showAllCameras
+		{
+			cameras = app.cameras
+		}
+		else
+		{
+			let network = Utils.getNetworkName()
+			showAllCameras = network.isEmpty
+			cameras = showAllCameras ? app.cameras : Utils.getNetworkCameras(network, true)
+		}
 		cameras.sort(by: { $0.name < $1.name })
+		showNetwork = showAllCameras
 	}
 	
 	//**********************************************************************
@@ -177,9 +189,9 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 		let camera = cameras[indexPath.row]
 		cell.textLabel?.text = camera.name
 		var details = camera.address + ":" + String(camera.port)
-		if app.settings.showAllCameras
+		if showNetwork && Utils.isIpAddress(camera.address)
 		{
-			details = camera.network + ": " + details
+			details = camera.network + ":" + details
 		}
 		cell.detailTextLabel?.text = details
 		return cell

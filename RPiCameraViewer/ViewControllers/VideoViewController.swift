@@ -81,11 +81,12 @@ class VideoViewController: UIViewController
 		imageView.image = nil
 
 		// start reading the stream and decoding the video
-		createReadThread()
+		if createReadThread()
+		{
+			// fade out after a while
+			startFadeOutTimer()
+		}
 		
-		// fade out after a while
-		startFadeOutTimer()
-
 		// start listening for orientation changes
 		NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
 	}
@@ -113,15 +114,25 @@ class VideoViewController: UIViewController
 		destroyVideoSession()
 		
 		// set the status label
-		statusLabel.text = "videoStopped".local
-		statusLabel.textColor = Utils.badTextColor
-		statusLabel.isHidden = false
+		statusError("videoStopped".local)
 		
 		// close the controller if necessary
 		if close
 		{
 			dismiss(animated: true)
 		}
+	}
+	
+	//**********************************************************************
+	// statusError
+	//**********************************************************************
+	func statusError(_ message: String)
+	{
+		statusLabel.text = message
+		statusLabel.textColor = Utils.badTextColor
+		statusLabel.isHidden = false
+		snapshotButton.isHidden = true
+		stopFadeOutTimer()
 	}
 	
 	//**********************************************************************
@@ -286,81 +297,99 @@ class VideoViewController: UIViewController
 	//**********************************************************************
 	// createReadThread
 	//**********************************************************************
-	func createReadThread()
+	func createReadThread() -> Bool
 	{
-		if camera != nil
+		if camera == nil
 		{
-			DispatchQueue.global(qos: .background).async
+			statusError("errorNoCamera".local)
+			return false
+		}
+		
+		var address = camera!.address
+		if Utils.isHostname(address)
+		{
+			address = Utils.resolveHostname(address)
+			if address.isEmpty
 			{
-				self.dispatchGroup.enter()
-				self.dispatchGroup.notify(queue: .main)
+				let message = String(format: "errorCouldntResolveHostname".local, camera!.address)
+				statusError(message)
+				return false
+			}
+		}
+		
+		DispatchQueue.global(qos: .background).async
+		{
+			self.dispatchGroup.enter()
+			self.dispatchGroup.notify(queue: .main)
+			{
+				self.stopVideo()
+			}
+			let socket = openSocket(address, Int32(self.camera!.port), Int32(self.app.settings.scanTimeout))
+			if (socket >= 0)
+			{
+				var numZeroes = 0
+				var numReadErrors = 0
+				var nal = [UInt8]()
+				let ptr = UnsafeMutablePointer<UInt8>.allocate(capacity: self.READ_SIZE)
+				let buffer = UnsafeMutableBufferPointer.init(start: ptr, count: self.READ_SIZE)
+				var gotHeader = false
+				self.running = true
+				while self.running && numReadErrors < self.MAX_READ_ERRORS
 				{
-					self.stopVideo()
-				}
-				let socket = openSocket(self.camera!.address, Int32(self.camera!.port), Int32(self.app.settings.scanTimeout))
-				if (socket >= 0)
-				{
-					var numZeroes = 0
-					var numReadErrors = 0
-					var nal = [UInt8]()
-					let ptr = UnsafeMutablePointer<UInt8>.allocate(capacity: self.READ_SIZE)
-					let buffer = UnsafeMutableBufferPointer.init(start: ptr, count: self.READ_SIZE)
-					var gotHeader = false
-					self.running = true
-					while self.running && numReadErrors < self.MAX_READ_ERRORS
+					let len = readSocket(socket, ptr, Int32(self.READ_SIZE))
+					if len > 0
 					{
-						let len = readSocket(socket, ptr, Int32(self.READ_SIZE))
-						if len > 0
+						numReadErrors = 0
+						for i in 0..<len
 						{
-							numReadErrors = 0
-							for i in 0..<len
+							let b = buffer[Int(i)]
+							if !self.running { break }
+							if b == 0
 							{
-								let b = buffer[Int(i)]
-								if !self.running { break }
-								if b == 0
+								numZeroes += 1
+							}
+							else
+							{
+								if b == 1 && numZeroes >= 3
 								{
-									numZeroes += 1
+									while numZeroes > 3
+									{
+										nal.append(0)
+										numZeroes -= 1
+									}
+									if gotHeader
+									{
+										if !self.running { break }
+										self.processNal(&nal)
+									}
+									nal = [0, 0, 0, 1]
+									gotHeader = true
 								}
 								else
 								{
-									if b == 1 && numZeroes >= 3
+									while numZeroes > 0
 									{
-										while numZeroes > 3
-										{
-											nal.append(0)
-											numZeroes -= 1
-										}
-										if gotHeader
-										{
-											if !self.running { break }
-											self.processNal(&nal)
-										}
-										nal = [0, 0, 0, 1]
-										gotHeader = true
+										nal.append(0)
+										numZeroes -= 1
 									}
-									else
-									{
-										while numZeroes > 0
-										{
-											nal.append(0)
-											numZeroes -= 1
-										}
-										nal.append(b)
-									}
-									numZeroes = 0
+									nal.append(b)
 								}
+								numZeroes = 0
 							}
 						}
-						else
-						{
-							numReadErrors += 1
-						}
 					}
-					closeSocket(socket)
+					else
+					{
+						numReadErrors += 1
+					}
 				}
-				self.dispatchGroup.leave()
+				closeSocket(socket)
+				ptr.deallocate()
 			}
+			self.dispatchGroup.leave()
 		}
+		
+		return true
 	}
 	
 	//**********************************************************************
