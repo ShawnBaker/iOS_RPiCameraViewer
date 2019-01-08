@@ -43,12 +43,15 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate
     func tabBarController(_ tabBarController: UITabBarController,
                             shouldSelect viewController: UIViewController) -> Bool
     {
-        if let settings = selectedViewController as? SettingsViewController
-        {
-			let result = settings.save()
-			camerasViewController?.refreshCameras()
-            return result
-        }
+		if let navController = selectedViewController as? UINavigationController
+		{
+			if let settingsController = navController.topViewController as? SettingsViewController
+			{
+				let result = settingsController.save()
+				camerasViewController?.refreshCameras()
+				return result
+			}
+		}
         return true
     }
 }
