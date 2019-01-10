@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		291EB6D421E71536007CFB93 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291EB6D321E71536007CFB93 /* Reachability.swift */; };
 		2976994A21DC5A3600718766 /* NavigationControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2976994921DC5A3600718766 /* NavigationControllerExt.swift */; };
 		29A295FE1FBA5F76004A7F77 /* NetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A295FD1FBA5F76004A7F77 /* NetworkInterface.swift */; };
 		29E792911FB4FBEA0083CA75 /* ZoomPan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E792901FB4FBEA0083CA75 /* ZoomPan.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		291EB6D321E71536007CFB93 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		2976994921DC5A3600718766 /* NavigationControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExt.swift; sourceTree = "<group>"; };
 		297ECB7721DC0C1A00DC8869 /* RPiCameraViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RPiCameraViewer.entitlements; sourceTree = "<group>"; };
 		29A295FD1FBA5F76004A7F77 /* NetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterface.swift; sourceTree = "<group>"; };
@@ -99,7 +101,6 @@
 		29FAE7A11FB38CBB00747217 /* RPiCameraViewer */ = {
 			isa = PBXGroup;
 			children = (
-				297ECB7721DC0C1A00DC8869 /* RPiCameraViewer.entitlements */,
 				29FAE7B41FB38CD100747217 /* Classes */,
 				29FAE7BF1FB38ED400747217 /* Sockets */,
 				29FAE7C01FB38EDB00747217 /* Views */,
@@ -111,6 +112,7 @@
 				29FAE7A21FB38CBB00747217 /* AppDelegate.swift */,
 				29FAE7A91FB38CBB00747217 /* Assets.xcassets */,
 				29FAE7AE1FB38CBB00747217 /* Info.plist */,
+				297ECB7721DC0C1A00DC8869 /* RPiCameraViewer.entitlements */,
 			);
 			path = RPiCameraViewer;
 			sourceTree = "<group>";
@@ -125,6 +127,7 @@
 				29A295FD1FBA5F76004A7F77 /* NetworkInterface.swift */,
 				29E792901FB4FBEA0083CA75 /* ZoomPan.swift */,
 				2976994921DC5A3600718766 /* NavigationControllerExt.swift */,
+				291EB6D321E71536007CFB93 /* Reachability.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				29FAE7BB1FB38EA400747217 /* Settings.swift in Sources */,
 				29FAE7A31FB38CBB00747217 /* AppDelegate.swift in Sources */,
 				29FAE7CC1FB38F1800747217 /* SettingsViewController.swift in Sources */,
+				291EB6D421E71536007CFB93 /* Reachability.swift in Sources */,
 				29FAE7D11FB38F1800747217 /* CamerasViewController.swift in Sources */,
 				29FAE7DC1FB38F3D00747217 /* mysocket.c in Sources */,
 				29FAE7D71FB38F2400747217 /* Button.swift in Sources */,

@@ -13,6 +13,7 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 	let cameraCellId = "CameraCell"
 	let emptyCellId = "EmptyCameraCell"
 	let app = UIApplication.shared.delegate as! AppDelegate
+	let reachability = Reachability()!
 	var camera = Camera()
 	var cameras = [Camera]()
 	var showNetwork = false
@@ -30,6 +31,18 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 		// get the list of cameras
 		refreshCameras()
 		
+		// detect network changes
+		reachability.whenReachable = { reachability in
+			if reachability.connection == .wifi
+			{
+				self.refreshCameras()
+			}
+		}
+		reachability.whenUnreachable = { _ in
+			self.refreshCameras()
+		}
+		try? reachability.startNotifier()
+		
 		// if there are no cameras then do a scan
 		if cameras.count == 0
 		{
@@ -38,6 +51,15 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 				self.performSegue(withIdentifier: "ScanForCameras", sender: self)
 			})
 		}
+	}
+
+	//**********************************************************************
+	// viewWillDisappear
+	//**********************************************************************
+	override func viewWillDisappear(_ animated: Bool)
+	{
+		super.viewWillDisappear(animated)
+		reachability.stopNotifier()
 	}
 
 	//**********************************************************************
