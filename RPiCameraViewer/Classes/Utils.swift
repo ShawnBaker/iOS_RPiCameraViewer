@@ -169,8 +169,8 @@ class Utils
 			let app = UIApplication.shared.delegate as! AppDelegate
 			for camera in app.cameras
 			{
-				if (isIpAddress(camera.address) && camera.network == network) ||
-					(includeHostnames && isHostname(camera.address))
+				let isIp = isIpAddress(camera.address)
+				if (isIp && camera.network == network) || (!isIp && includeHostnames)
 				{
 					networkCameras.append(camera)
 				}

@@ -306,7 +306,7 @@ class VideoViewController: UIViewController
 		}
 		
 		var address = camera!.address
-		if Utils.isHostname(address)
+		if !Utils.isIpAddress(address)
 		{
 			address = Utils.resolveHostname(address)
 			if address.isEmpty
