@@ -1,4 +1,4 @@
-// Copyright © 2017-2018 Shawn Baker using the MIT License.
+// Copyright © 2017-2019 Shawn Baker using the MIT License.
 import Foundation
 import SystemConfiguration.CaptiveNetwork
 import UIKit
