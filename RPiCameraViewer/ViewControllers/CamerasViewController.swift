@@ -33,15 +33,11 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 		
 		// detect network changes
 		reachability.whenReachable = { reachability in
-			if reachability.connection == .wifi
-			{
-				self.refreshCameras()
-			}
+			self.refreshCameras()
 		}
 		reachability.whenUnreachable = { _ in
 			self.refreshCameras()
 		}
-		try? reachability.startNotifier()
 		
 		// if there are no cameras then do a scan
 		if cameras.count == 0
@@ -51,6 +47,15 @@ class CamerasViewController: UIViewController, UITableViewDataSource, UITableVie
 				self.performSegue(withIdentifier: "ScanForCameras", sender: self)
 			})
 		}
+	}
+
+	//**********************************************************************
+	// viewWillAppear
+	//**********************************************************************
+	override func viewWillAppear(_ animated: Bool)
+	{
+		super.viewWillAppear(animated)
+		try? reachability.startNotifier()
 	}
 
 	//**********************************************************************
