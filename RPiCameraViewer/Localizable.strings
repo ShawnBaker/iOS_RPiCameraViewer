@@ -1,5 +1,5 @@
 // Copyright © 2016-2019 Shawn Baker using the MIT License.
-errorBadAddress = "Invalid address.";
+errorBadAddress = "The address is not a valid IP address or host name.";
 errorCouldntResolveHostname = "Couldn't resolve hostname\n%@";
 errorNameAlreadyExists = "The camera name already exists.";
 errorNoAddress = "You must enter an address.";
